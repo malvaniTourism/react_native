@@ -5,10 +5,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DrawerNavigator from './DrawerNavigator';
 import TabNavigator from './TabNavigator';
 
+import SignIn from '../Screens/AuthScreens/SignIn'
+import SignUp from '../Screens/AuthScreens/SignUp'
+
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     return (
         <NavigationContainer>
@@ -27,7 +30,7 @@ const StackNavigator = () => {
                 ) : (
                     // Auth screens
                     <Stack.Group screenOptions={{ headerShown: false }}>
-                        {/* <Stack.Screen name="SignIn" component={SignIn} /> */}
+                        <Stack.Screen name="SignIn" component={SignIn} />
                         {/* <Stack.Screen name="SignUp" component={SignUp} /> */}
                     </Stack.Group>
                 )}
