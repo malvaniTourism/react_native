@@ -35,6 +35,7 @@ const SignIn = () => {
           <TextField
             name={field.name}
             label={field.name}
+            placeholder={field.placeholder}
             fieldType={field.type}
             length={field.length}
             required={field.required}

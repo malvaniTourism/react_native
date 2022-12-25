@@ -146,7 +146,7 @@ const TextField = (props) => {
         <Input
             type={props.fieldType}
             error={props.isError || props.value === '' && isValid}
-            label={props.label}
+            placeholder={props.placeholder}
             name={props.name}
             variant="filled"
             autoComplete='off'
@@ -160,6 +160,7 @@ const TextField = (props) => {
             inputProps={{
                 maxLength: props.length,
             }}
+            underlineColorAndroid ='transparent'
             InputProps={x}
         />
     );

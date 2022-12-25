@@ -7,6 +7,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    textField: {
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#bbb',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        padding: 10
+    },
 });
 
 export default styles;
