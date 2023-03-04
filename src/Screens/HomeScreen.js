@@ -1,50 +1,26 @@
 import { useState } from "react"
 import { View, Text } from "react-native"
-import TextField from "../Components/Customs/TextField"
-import { SignInFields } from "../Services/Constants/FIELDS"
+import TopComponent from "../Components/Common/TopComponent"
+import Banner from "../Components/Customs/Banner"
+import SearchBar from "../Components/Customs/Search"
+import SmallCard from "../Components/Customs/SmallCard"
+import styles from "./Styles"
 
 const HomeScreen = () => {
-    const [username, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-
-    const setChild = (val, isVal, index) => {
-        switch (index) {
-            case 0:
-                setUserName(val);
-                break;
-            case 1:
-                setPassword(val);
-                break;
-        }
-    }
-
-    const getInputValue = (index) => {
-        switch (index) {
-            case 0:
-                return username;
-            case 1:
-                return password;
-        }
-    };
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            {
-                SignInFields.map((field, index) => {
-                    return (
-                        <TextField
-                            name={field.name}
-                            label={field.name}
-                            fieldType={field.type}
-                            length={field.length}
-                            required={field.required}
-                            disabled={field.disabled}
-                            setChild={(v, i) => setChild(v, i, index)}
-                            value={getInputValue(index)}
-                        />
-                    )
-                })
-            }
+        <View style={{ flex: 1, alignItems: 'center' }}>
+            <TopComponent />
+            <SearchBar style={styles.homeSearchBar} placeholder={'Search by Name'} />
+            <Banner />
+            <View style={{ flexDirection: 'row' }}>
+                <SmallCard />
+                <SmallCard />
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+                <SmallCard />
+                <SmallCard />
+            </View>
         </View>
     )
 }

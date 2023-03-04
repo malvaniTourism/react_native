@@ -8,23 +8,26 @@ import TabNavigator from './TabNavigator';
 import SignIn from '../Screens/AuthScreens/SignIn'
 import SignUp from '../Screens/AuthScreens/SignUp'
 
+import HomeScreen from '../Screens/HomeScreen';
+
+
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
 
     return (
         <NavigationContainer>
             <Stack.Navigator>
                 {isLoggedIn ? (
                     // Screens for logged in users
-                    <Stack.Group>
-                        <Stack.Screen
+                    <Stack.Group screenOptions={{ headerShown: false }}>
+                        {/* <Stack.Screen
                             name="Root"
                             component={DrawerNavigator}
                             options={{ headerShown: false }}
-                        />
-                        {/* <Stack.Screen name="Home" component={Home} /> */}
+                        /> */}
+                        <Stack.Screen name="HomeScreen" component={HomeScreen} />
                         {/* <Stack.Screen name="Profile" component={Profile} /> */}
                     </Stack.Group>
                 ) : (

@@ -1,15 +1,15 @@
 import { Button } from '@rneui/themed'
 import React from 'react'
 
-const SubmitButton = (props) => {
+const SubmitButton = ({ title, style, isDisabled, raised, type, onPress }) => {
     return (
         <Button
-            title={props.title}
-            style={props.style}
-            disabled={props.isDisabled}
-            raised={props.raised}
-            type={props.type}
-            onPress={props.onPress}
+            title={title}
+            style={style}
+            disabled={isDisabled}
+            raised={raised}
+            type={type}
+            onPress={onPress}
         />
     )
 }

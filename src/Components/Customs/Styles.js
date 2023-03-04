@@ -1,19 +1,50 @@
 import { StyleSheet } from "react-native";
+import COLOR from "../../Services/Constants/COLORS";
+import DIMENSIONS from "../../Services/Constants/DIMENSIONS";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLOR.white,
         alignItems: 'center',
         justifyContent: 'center',
     },
     textField: {
-        backgroundColor: '#fff',
+        backgroundColor: COLOR.white,
         borderWidth: 1,
-        borderColor: '#bbb',
+        borderColor: COLOR.grey,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         padding: 10
+    },
+    searchContainer: {
+        backgroundColor: 'transparent',
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        width: DIMENSIONS.screenWidth
+    },
+    searchInputContainer: {
+        backgroundColor: COLOR.white,
+        borderRadius: 50,
+        shadowColor: COLOR.black,
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        elevation: 10
+    },
+    smallCard: {
+        width: DIMENSIONS.screenWidth / 2 - 30,
+        height: DIMENSIONS.screenWidth / 7,
+        backgroundColor: COLOR.white,
+        elevation: 10,
+        margin: 10
+    },
+    banner: {
+        width: DIMENSIONS.screenWidth - 40,
+        height: DIMENSIONS.screenWidth / 2,
+        backgroundColor: COLOR.white,
+        elevation: 10
     },
 });
 
