@@ -13,9 +13,10 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.white,
         borderWidth: 1,
         borderColor: COLOR.grey,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
         padding: 10
+    },
+    textFieldContainer: {
+        
     },
     searchContainer: {
         backgroundColor: 'transparent',
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
         margin: 10
     },
     banner: {
-        width: DIMENSIONS.screenWidth - 40,
-        height: DIMENSIONS.screenWidth / 2,
+        width: DIMENSIONS.bannerWidth,
+        height: DIMENSIONS.halfWidth,
         backgroundColor: COLOR.white,
         elevation: 10
     },

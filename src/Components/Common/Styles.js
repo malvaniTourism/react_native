@@ -11,6 +11,23 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 70,
         position: 'absolute'
     },
+    textContainerStyle: {
+        width: DIMENSIONS.bannerWidth,
+        marginBottom: -30
+    },
+    searchPanelField: {
+    },
+    searchButtonContainerStyle: {
+        marginTop: 15,
+    },
+    searchButtonStyle: {
+        height: 50,
+        backgroundColor: COLOR.yellow,
+    },
+    buttonTitleStyle: {
+        color: COLOR.white,
+        fontWeight: 'bold'
+    },
 });
 
 export default styles;
