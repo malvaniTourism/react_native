@@ -45,7 +45,13 @@ const styles = StyleSheet.create({
         width: DIMENSIONS.bannerWidth,
         height: DIMENSIONS.halfWidth,
         backgroundColor: COLOR.white,
-        elevation: 10
+        elevation: 10,
+        animation: 'fadeinout 4s infinite'
+    },
+    bannerImage: {
+        width: DIMENSIONS.bannerWidth,
+        height: DIMENSIONS.halfWidth,
+        animation: 'fadeinout 4s infinite'
     },
 });
 

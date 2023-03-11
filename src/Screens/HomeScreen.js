@@ -10,6 +10,14 @@ import styles from "./Styles"
 
 const HomeScreen = () => {
     const [searchValue, setSearchValue] = useState('')
+    const [bannerImages, setBannerImages] = useState(
+        [
+            'https://4kwallpapers.com/images/walls/thumbs_3t/912.jpg',
+            'https://c4.wallpaperflare.com/wallpaper/977/138/381/tbilisi-georgia-wallpaper-preview.jpg',
+            'https://c4.wallpaperflare.com/wallpaper/766/970/409/cities-city-building-cityscape-wallpaper-preview.jpg',
+            'https://c4.wallpaperflare.com/wallpaper/631/683/713/nature-bridge-sky-city-wallpaper-preview.jpg'
+        ]
+    )
 
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
@@ -27,7 +35,7 @@ const HomeScreen = () => {
                 })
             }
             <SearchPanel />
-            <Banner />
+            <Banner bannerImages={bannerImages} />
             <View style={{ flexDirection: 'row' }}>
                 <SmallCard />
                 <SmallCard />
