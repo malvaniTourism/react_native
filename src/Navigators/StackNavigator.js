@@ -9,6 +9,7 @@ import SignIn from '../Screens/AuthScreens/SignIn'
 import SignUp from '../Screens/AuthScreens/SignUp'
 
 import HomeScreen from '../Screens/HomeScreen';
+import SearchList from '../Screens/SearchList';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,12 +23,12 @@ const StackNavigator = () => {
                 {isLoggedIn ? (
                     // Screens for logged in users
                     <Stack.Group screenOptions={{ headerShown: false }}>
-                        {/* <Stack.Screen
+                        <Stack.Screen
                             name="Root"
                             component={DrawerNavigator}
                             options={{ headerShown: false }}
-                        /> */}
-                        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                        />
+                        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
                         {/* <Stack.Screen name="Profile" component={Profile} /> */}
                     </Stack.Group>
                 ) : (
@@ -38,13 +39,13 @@ const StackNavigator = () => {
                     </Stack.Group>
                 )}
                 {/* Common modal screens */}
-                <Stack.Group screenOptions={{ presentation: 'modal' }}>
+                <Stack.Group screenOptions={{ headerShown: false, presentation: 'modal' }}>
                     <Stack.Screen
                         name="Home"
                         component={TabNavigator}
                         options={{ headerShown: false }}
                     />
-                    {/* <Stack.Screen name="Help" component={Help} /> */}
+                    <Stack.Screen name="SearchList" component={SearchList} />
                     {/* <Stack.Screen name="Invite" component={Invite} /> */}
                     {/* <Stack.Screen name="Feed" component={Feed} /> */}
                 </Stack.Group>

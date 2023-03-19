@@ -11,7 +11,9 @@ const DIMENSIONS = {
     screenWidth: sw,
     windowWidth: ww,
     halfWidth: sw / 2,
-    bannerWidth: sw - 40
+    bannerWidth: sw - 40,
+    iconSize: 20,
+    userIconSize: 30
 };
 
 export default DIMENSIONS;
