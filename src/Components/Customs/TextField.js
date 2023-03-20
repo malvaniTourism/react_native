@@ -153,6 +153,7 @@ const TextField = (props) => {
             value={props.value === '' && isValid ? value : props.value}
             style={[styles.textField, props.style]}
             containerStyle={[styles.textFieldContainer, props.containerStyle]}
+            inputContainerStyle={props.inputContainerStyle}
             helperText={(props.value === '' && isValid) || props.value === '' ? errorText : ''}
             onChangeText={value => onChange(value)}
             disabled={props.disable}

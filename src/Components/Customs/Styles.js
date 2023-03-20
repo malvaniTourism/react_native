@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     searchInputContainer: {
         backgroundColor: COLOR.white,
-        borderRadius: 50,
+        borderRadius: DIMENSIONS.borderRadius,
         shadowColor: COLOR.black,
         shadowOffset: {
             width: 10,

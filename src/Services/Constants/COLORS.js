@@ -34,7 +34,9 @@ const COLOR = {
     cardBackground: '#f8f9fa',
     cardaText: '#808080',
     underlineColor: '#b9b9b9',
-    underlineActiveColor: '#773ba5'
+    underlineActiveColor: '#773ba5',
+
+    transparent: 'transparent'
 
 };
 

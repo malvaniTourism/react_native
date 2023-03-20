@@ -35,25 +35,28 @@ const SearchPanel = () => {
 
     return (
         <View style={{ marginVertical: 20 }}>
-            {
-                SrcDest.map((field, index) => {
-                    return (
-                        <TextField
-                            name={field.name}
-                            label={field.name}
-                            placeholder={field.placeholder}
-                            fieldType={field.type}
-                            length={field.length}
-                            required={field.required}
-                            disabled={field.disabled}
-                            value={getValue(index)}
-                            setChild={(val, i) => setValue(val, i, index)}
-                            style={styles.searchPanelField}
-                            containerStyle={styles.textContainerStyle}
-                        />
-                    )
-                })
-            }
+            <View style={styles.fieldsView}>
+                {
+                    SrcDest.map((field, index) => {
+                        return (
+                            <TextField
+                                name={field.name}
+                                label={field.name}
+                                placeholder={field.placeholder}
+                                fieldType={field.type}
+                                length={field.length}
+                                required={field.required}
+                                disabled={field.disabled}
+                                value={getValue(index)}
+                                setChild={(val, i) => setValue(val, i, index)}
+                                style={styles.searchPanelField}
+                                containerStyle={styles.textContainerStyle}
+                                inputContainerStyle={styles.inputContainerStyle}
+                            />
+                        )
+                    })
+                }
+            </View>
             <CustomButton
                 title={'Search'}
                 containerStyle={styles.searchButtonContainerStyle}
