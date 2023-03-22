@@ -44,6 +44,20 @@ const styles = StyleSheet.create({
         color: COLOR.white,
         fontWeight: 'bold'
     },
+    headerMain: {
+        // flex: 1,
+        height: DIMENSIONS.headerHeight,
+        width: DIMENSIONS.screenWidth,
+        backgroundColor: COLOR.yellow,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    headerText: {
+        fontWeight: 'bold',
+        fontSize: DIMENSIONS.headerTextSize,
+        textAlign: 'center'
+    }
 });
 
 export default styles;

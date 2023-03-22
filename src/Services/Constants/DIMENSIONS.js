@@ -15,7 +15,9 @@ const DIMENSIONS = {
     iconSize: 20,
     userIconSize: 30,
     borderRadius: 30,
-    borderRadiusSmall: 20
+    borderRadiusSmall: 20,
+    headerHeight: sw / 7,
+    headerTextSize: 17
 };
 
 export default DIMENSIONS;

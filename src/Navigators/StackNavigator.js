@@ -8,9 +8,9 @@ import TabNavigator from './TabNavigator';
 import SignIn from '../Screens/AuthScreens/SignIn'
 import SignUp from '../Screens/AuthScreens/SignUp'
 
-import HomeScreen from '../Screens/HomeScreen';
 import SearchList from '../Screens/SearchList';
-
+import RoutesList from '../Screens/RoutesList';
+import BusTimings from '../Screens/BusTimings';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +46,8 @@ const StackNavigator = () => {
                         options={{ headerShown: false }}
                     />
                     <Stack.Screen name="SearchList" component={SearchList} />
+                    <Stack.Screen name="RoutesList" component={RoutesList} />
+                    <Stack.Screen name="BusTimings" component={BusTimings} />
                     {/* <Stack.Screen name="Invite" component={Invite} /> */}
                     {/* <Stack.Screen name="Feed" component={Feed} /> */}
                 </Stack.Group>

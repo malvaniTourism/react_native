@@ -1,8 +1,8 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from '../Screens/HomeScreen';
 import Profile from '../Screens/Profile';
 import Settings from '../Screens/Settings';
+import SearchList from '../Screens/SearchList';
 import TabNavigator from './TabNavigator';
 
 const Drawer = createDrawerNavigator();
@@ -13,6 +13,7 @@ const DrawerNavigator = () => {
             <Drawer.Screen name="Home" component={TabNavigator} />
             <Drawer.Screen name="Profile" component={Profile} />
             <Drawer.Screen name="Settings" component={Settings} />
+            <Drawer.Screen name="Search List" component={SearchList} />
         </Drawer.Navigator>
     )
 }

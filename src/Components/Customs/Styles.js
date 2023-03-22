@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     smallCard: {
         width: DIMENSIONS.screenWidth / 2 - 30,
-        height: DIMENSIONS.screenWidth / 7,
+        height: DIMENSIONS.headerHeight,
         backgroundColor: COLOR.white,
         elevation: 10,
         margin: 10
