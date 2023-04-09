@@ -10,6 +10,7 @@ import styles from "./Styles"
 import FontIcons from 'react-native-vector-icons/FontAwesome5';
 import COLOR from "../Services/Constants/COLORS"
 import DIMENSIONS from "../Services/Constants/DIMENSIONS"
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const HomeScreen = ({ navigation }) => {
     const [searchValue, setSearchValue] = useState('')
@@ -46,12 +47,12 @@ const HomeScreen = ({ navigation }) => {
                 <SearchPanel />
                 <Banner bannerImages={bannerImages} />
                 <View style={{ flexDirection: 'row' }}>
-                    <SmallCard />
-                    <SmallCard />
+                    <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="One Way Ticket" />
+                    <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Bus Pass" />
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                    <SmallCard />
-                    <SmallCard />
+                    <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Chalo Bus" />
+                    <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Card Recharge" />
                 </View>
             </View>
         </ScrollView>

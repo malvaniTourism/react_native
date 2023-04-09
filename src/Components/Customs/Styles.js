@@ -39,7 +39,13 @@ const styles = StyleSheet.create({
         height: DIMENSIONS.headerHeight,
         backgroundColor: COLOR.white,
         elevation: 10,
-        margin: 10
+        margin: 10,
+        borderRadius: DIMENSIONS.borderRadiusXXS,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    smallCardIcon: {
+        marginHorizontal: 10
     },
     banner: {
         width: DIMENSIONS.bannerWidth,
@@ -52,6 +58,19 @@ const styles = StyleSheet.create({
         width: DIMENSIONS.bannerWidth,
         height: DIMENSIONS.halfWidth,
         animation: 'fadeinout 4s infinite'
+    },
+    routeLineVert: {
+        borderColor: COLOR.black,
+        borderWidth: 1,
+        position: 'absolute',
+        height: 80,
+        top: -30,
+        left: 5
+    },
+    routeDot: {
+        borderColor: COLOR.black,
+        borderWidth: 6,
+        borderRadius: DIMENSIONS.borderRadius
     },
 });
 

@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import COLOR from '../Services/Constants/COLORS';
 import DIMENSIONS from '../Services/Constants/DIMENSIONS';
+import RouteLine from '../Components/Customs/RouteLine';
 
 const RoutesList = ({ navigation, route }) => {
     const [list, setList] = useState([
@@ -40,7 +41,7 @@ const RoutesList = ({ navigation, route }) => {
         return (
             <ListItem bottomDivider>
                 {/* <Avatar source={{ uri: item.avatar_url }} /> */}
-                <Text>{item.id}</Text>
+                <RouteLine />
                 <ListItem.Content>
                     <ListItem.Title>{item.name}</ListItem.Title>
                 </ListItem.Content>

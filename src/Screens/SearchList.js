@@ -5,6 +5,7 @@ import Header from '../Components/Common/Header'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import COLOR from '../Services/Constants/COLORS';
 import DIMENSIONS from '../Services/Constants/DIMENSIONS';
+import RouteLine from '../Components/Customs/RouteLine';
 
 const SearchList = ({ navigation }) => {
   const [list, setList] = useState([
@@ -30,6 +31,7 @@ const SearchList = ({ navigation }) => {
     return (
       <ListItem bottomDivider onPress={() => getRoutes(item.name)}>
         {/* <Avatar source={{ uri: item.avatar_url }} /> */}
+        <RouteLine />
         <Text>{item.id}</Text>
         <ListItem.Content>
           <ListItem.Title>{item.number}</ListItem.Title>

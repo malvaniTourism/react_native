@@ -16,6 +16,8 @@ const DIMENSIONS = {
     userIconSize: 30,
     borderRadius: 30,
     borderRadiusSmall: 20,
+    borderRadiusXS: 10,
+    borderRadiusXXS: 5,
     headerHeight: sw / 7,
     headerTextSize: 17
 };
