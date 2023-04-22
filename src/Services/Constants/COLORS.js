@@ -1,4 +1,6 @@
 const COLOR = {
+    themeLightGreen: '#9BC90D',
+    themeDarkGreen: '#79A70A',
 
     primaryColor: '#543379',
     primarylight: '#9c48d4',

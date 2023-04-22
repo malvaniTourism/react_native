@@ -7,7 +7,6 @@ import SearchBar from "../Components/Customs/Search"
 import SmallCard from "../Components/Customs/SmallCard"
 import { BusNo } from "../Services/Constants/FIELDS"
 import styles from "./Styles"
-import FontIcons from 'react-native-vector-icons/FontAwesome5';
 import COLOR from "../Services/Constants/COLORS"
 import DIMENSIONS from "../Services/Constants/DIMENSIONS"
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -23,15 +22,10 @@ const HomeScreen = ({ navigation }) => {
         ]
     )
 
-    const openDrawer = () => {
-        navigation.openDrawer();
-    }
-
     return (
         <ScrollView>
             <View style={{ flex: 1, alignItems: 'center' }}>
-                <TopComponent />
-                <FontIcons name="user-circle" color={COLOR.black} size={DIMENSIONS.userIconSize} style={styles.userIcon} onPress={() => openDrawer()} />
+                <TopComponent navigation={navigation} />
                 {
                     BusNo.map((field, index) => {
                         return (

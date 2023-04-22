@@ -4,12 +4,23 @@ import DIMENSIONS from "../../Services/Constants/DIMENSIONS.js";
 
 const styles = StyleSheet.create({
     topComponent: {
-        height: DIMENSIONS.windowHeight * 15 / 100,
+        height: DIMENSIONS.windowHeight * 27 / 100,
         width: DIMENSIONS.windowWidth,
-        backgroundColor: COLOR.yellow,
-        borderBottomLeftRadius: 70,
-        borderBottomRightRadius: 70,
-        position: 'absolute'
+        backgroundColor: COLOR.themeDarkGreen,
+        borderBottomLeftRadius: DIMENSIONS.borderRadiusSmall,
+        borderBottomRightRadius: DIMENSIONS.borderRadiusSmall,
+        position: 'relative'
+    },
+    userIcon: {
+        margin: 10,
+    },
+    topMenu: {
+        backgroundColor: COLOR.transparent,
+        width: DIMENSIONS.windowWidth,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        zIndex: 10
     },
     fieldsView: {
         borderWidth: 1,
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
     },
     searchButtonStyle: {
         height: 50,
-        backgroundColor: COLOR.yellow,
+        backgroundColor: COLOR.themeDarkGreen,
         borderBottomLeftRadius: DIMENSIONS.borderRadiusSmall,
         borderBottomRightRadius: DIMENSIONS.borderRadiusSmall
     },
@@ -48,7 +59,7 @@ const styles = StyleSheet.create({
         // flex: 1,
         height: DIMENSIONS.headerHeight,
         width: DIMENSIONS.screenWidth,
-        backgroundColor: COLOR.yellow,
+        backgroundColor: COLOR.themeDarkGreen,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
