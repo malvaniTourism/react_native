@@ -1,10 +1,10 @@
 import axios from "axios";
 import Path from './BaseUrl'
 
-export const comnGet = async (url) => {
+export const comnGet = async (url, apiToken) => {
     let myUrl = Path.API_PATH + url;
     const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem('apiToken')}` }
+        headers: { Authorization: `Bearer ${apiToken}` }
     }
 
     return axios.get(myUrl, config)

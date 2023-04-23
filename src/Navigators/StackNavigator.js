@@ -11,6 +11,9 @@ import SignUp from '../Screens/AuthScreens/SignUp'
 import SearchList from '../Screens/SearchList';
 import RoutesList from '../Screens/RoutesList';
 import BusTimings from '../Screens/BusTimings';
+import ExploreList from '../Screens/ExploreList';
+import CityDetails from '../Screens/CityDetails';
+import PlaceList from '../Screens/PlaceList';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +51,9 @@ const StackNavigator = () => {
                     <Stack.Screen name="SearchList" component={SearchList} />
                     <Stack.Screen name="RoutesList" component={RoutesList} />
                     <Stack.Screen name="BusTimings" component={BusTimings} />
+                    <Stack.Screen name="ExploreList" component={ExploreList} />
+                    <Stack.Screen name="CityDetails" component={CityDetails} />
+                    <Stack.Screen name="PlaceList" component={PlaceList} />
                     {/* <Stack.Screen name="Invite" component={Invite} /> */}
                     {/* <Stack.Screen name="Feed" component={Feed} /> */}
                 </Stack.Group>
