@@ -1,9 +1,11 @@
 import {
+    SaveAccess_token,
     SaveLoginUser,
 } from './Types';
 
 const initialState = {
-    loginUser: []
+    loginUser: [],
+    access_token: ''
 };
 
 const commonReducer = (state = initialState, action) => {
@@ -12,6 +14,11 @@ const commonReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginUser: action.payload
+            }
+        case SaveAccess_token:
+            return {
+                ...state,
+                access_token: action.payload
             }
         default:
             return state;

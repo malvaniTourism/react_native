@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { View, Text, ScrollView } from "react-native"
 import SearchPanel from "../Components/Common/SearchPanel"
 import TopComponent from "../Components/Common/TopComponent"
@@ -10,8 +10,11 @@ import styles from "./Styles"
 import COLOR from "../Services/Constants/COLORS"
 import DIMENSIONS from "../Services/Constants/DIMENSIONS"
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { comnPost, login } from '../Services/Api/CommonServices'
+import { connect } from "react-redux";
+import { saveAccess_token } from "../Reducers/CommonActions"
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, ...props }) => {
     const [searchValue, setSearchValue] = useState('')
     const [bannerImages, setBannerImages] = useState(
         [
@@ -21,6 +24,17 @@ const HomeScreen = ({ navigation }) => {
             'https://c4.wallpaperflare.com/wallpaper/631/683/713/nature-bridge-sky-city-wallpaper-preview.jpg'
         ]
     )
+
+    useEffect(() => {
+        var data = new FormData();
+        data.append('email', 'test@gmail.com');
+        data.append('password', 'Test@123');
+
+        comnPost('auth/login', data)
+            .then(res => {
+                props.saveAccess_token(res.data.data.access_token)
+            })
+    }, [])
 
     return (
         <ScrollView>
@@ -53,4 +67,18 @@ const HomeScreen = ({ navigation }) => {
     )
 }
 
-export default HomeScreen
+const mapStateToProps = state => {
+    return {
+        access_token: state.commonState.access_token,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        saveAccess_token: data => {
+            dispatch(saveAccess_token(data))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

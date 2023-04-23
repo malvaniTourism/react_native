@@ -54,7 +54,7 @@ const Banner = ({ style, bannerImages }) => {
         autoPlay={true}
         data={bannerImages}
         scrollAnimationDuration={1000}
-        onSnapToItem={(index) => console.log('current index:', index)}
+        // onSnapToItem={(index) => console.log('current index:', index)}
         renderItem={({ index }) => (
             <AnimationStyle source={{uri: `${bannerImages[index]}`}} style={styles.bannerImage} ></AnimationStyle>
         )}
