@@ -5,9 +5,9 @@ import DIMENSIONS from '../../Services/Constants/DIMENSIONS';
 
 import styles from './Styles'
 
-const Header = ({ startIcon, name, endIcon }) => {
+const Header = ({ startIcon, name, endIcon, style }) => {
     return (
-        <View style={styles.headerMain}>
+        <View style={[styles.headerMain, style]}>
             <View style={{ flex: 1, marginLeft: 7 }}>
                 {startIcon}
             </View>

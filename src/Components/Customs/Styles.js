@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     textFieldContainer: {
-        
+
     },
     searchContainer: {
         backgroundColor: 'transparent',
@@ -71,6 +71,16 @@ const styles = StyleSheet.create({
         borderColor: COLOR.black,
         borderWidth: 6,
         borderRadius: DIMENSIONS.borderRadius
+    },
+    containerStyle: {
+        width: DIMENSIONS.bannerWidth
+    },
+    buttonStyle: {
+        width: DIMENSIONS.bannerWidth,
+        backgroundColor: COLOR.themeDarkGreen
+    },
+    titleStyle: {
+        color: COLOR.white
     },
 });
 

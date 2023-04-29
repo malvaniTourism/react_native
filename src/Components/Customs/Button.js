@@ -1,18 +1,22 @@
 import { Button } from '@rneui/themed'
 import React from 'react'
+import styles from './Styles'
+import { View } from 'react-native'
 
 const CustomButton = ({ title, containerStyle, buttonStyle, titleStyle, isDisabled, raised, type, onPress }) => {
     return (
-        <Button
+        <View style={{alignItems: 'center'}}>
+            <Button
             title={title}
-            containerStyle={containerStyle}
-            buttonStyle={buttonStyle}
-            titleStyle={titleStyle}
+            containerStyle={[styles.containerStyle, containerStyle]}
+            buttonStyle={[styles.buttonStyle, buttonStyle]}
+            titleStyle={[styles.titleStyle, titleStyle]}
             disabled={isDisabled}
             raised={raised}
             type={type}
             onPress={onPress}
         />
+        </View>
     )
 }
 

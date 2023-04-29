@@ -5,6 +5,8 @@ import Settings from '../Screens/Settings';
 import SearchList from '../Screens/SearchList';
 import TabNavigator from './TabNavigator';
 import MapScreen from '../Screens/MapScreen';
+import SignIn from '../Screens/AuthScreens/SignIn';
+import SignUp from '../Screens/AuthScreens/SignUp';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,6 +18,8 @@ const DrawerNavigator = () => {
             <Drawer.Screen name="Settings" component={Settings} />
             <Drawer.Screen name="Search List" component={SearchList} />
             <Drawer.Screen name="Map Screen" component={MapScreen} />
+            <Drawer.Screen name="Login" component={SignIn} />
+            <Drawer.Screen name="SignUp" component={SignUp} />
         </Drawer.Navigator>
     )
 }
