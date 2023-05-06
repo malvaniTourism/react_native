@@ -15,9 +15,9 @@ import FontIcons from 'react-native-vector-icons/FontAwesome5';
 import COLOR from '../../Services/Constants/COLORS'
 import DIMENSIONS from '../../Services/Constants/DIMENSIONS'
 
-const VerifyOTP = ({ navigation, ...props }) => {
+const VerifyOTP = ({ navigation, route, ...props }) => {
     const [otp, setOtp] = useState('');
-    const [mobile, setMobile] = useState('');
+    const [mobile, setMobile] = useState(route.params.mobile);
 
     const setValue = (val, isVal, index) => {
         switch (index) {
@@ -41,7 +41,12 @@ const VerifyOTP = ({ navigation, ...props }) => {
         }
         comnPost('auth/verifyOtp', data)
             .then(res => {
-                navigation.navigate('Home')
+                if (res.data.success) {
+                    props.setLoader(true)
+                    AsyncStorage.setItem('access_token', res.data.data.access_token)
+                    props.saveAccess_token(res.data.data.access_token)
+                    navigation.navigate('Home')
+                }
             })
             .catch(err => console.log(err))
     }

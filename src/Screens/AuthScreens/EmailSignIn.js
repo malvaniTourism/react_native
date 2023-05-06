@@ -48,6 +48,7 @@ const EmailSignIn = ({ navigation, ...props }) => {
             .then(res => {
                 props.setLoader(true)
                 AsyncStorage.setItem('access_token', res.data.data.access_token)
+                props.saveAccess_token(res.data.data.access_token)
                 navigation.navigate('Home')
             })
             .catch(err => console.log(err))

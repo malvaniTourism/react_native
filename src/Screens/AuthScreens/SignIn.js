@@ -41,7 +41,7 @@ const SignIn = ({ navigation, ...props }) => {
     comnPost('auth/sendOtp', data)
       .then(res => {
         console.log(res);
-        navigation.navigate('VerifyOTP')
+        navigation.navigate('VerifyOTP', { mobile })
       })
       .catch(err => console.log(err))
   }

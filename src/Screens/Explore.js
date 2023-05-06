@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Text, TouchableOpacity } from 'react-native'
 import SmallCard from "../Components/Customs/SmallCard"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import COLOR from "../Services/Constants/COLORS"
 import DIMENSIONS from "../Services/Constants/DIMENSIONS"
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native'; // Import the navigation hook from your navigation library
 
 const Explore = () => {
