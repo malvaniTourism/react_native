@@ -12,7 +12,10 @@ import DIMENSIONS from "../Services/Constants/DIMENSIONS"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { comnPost, login } from '../Services/Api/CommonServices'
 import { connect } from "react-redux";
-import { saveAccess_token } from "../Reducers/CommonActions"
+import { saveAccess_token, setLoader } from "../Reducers/CommonActions"
+import Loader from "../Components/Customs/Loader"
+import SplashScreen from 'react-native-splash-screen'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation, ...props }) => {
     const [searchValue, setSearchValue] = useState('')
@@ -26,19 +29,22 @@ const HomeScreen = ({ navigation, ...props }) => {
     )
 
     useEffect(() => {
-        var data = new FormData();
-        data.append('email', 'test@gmail.com');
-        data.append('password', 'Test@123');
-
-        comnPost('auth/login', data)
-            .then(res => {
-                props.saveAccess_token(res.data.data.access_token)
-            })
+        saveToken()
+        SplashScreen.hide();
+        if (AsyncStorage.getItem('access_token') == '') {
+            navigation.navigate('Login')
+        }
+        props.setLoader(false)
     }, [])
+
+    const saveToken = async () => {
+        props.saveAccess_token(await AsyncStorage.getItem('access_token'))
+    }
 
     return (
         <ScrollView>
             <View style={{ flex: 1, alignItems: 'center' }}>
+                <Loader />
                 <TopComponent navigation={navigation} />
                 {
                     BusNo.map((field, index) => {
@@ -77,6 +83,9 @@ const mapDispatchToProps = dispatch => {
     return {
         saveAccess_token: data => {
             dispatch(saveAccess_token(data))
+        },
+        setLoader: data => {
+            dispatch(setLoader(data))
         }
     }
 }

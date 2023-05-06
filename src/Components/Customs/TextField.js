@@ -117,7 +117,7 @@ const TextField = (props) => {
                 }
             }
         } else {
-            if (requiredFlag) {
+            if (props.reqFlag) {
                 setErrorText(props.helperMsg)
                 setIsValid(true)
                 setValue(txtVal)

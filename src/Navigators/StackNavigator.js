@@ -14,6 +14,8 @@ import BusTimings from '../Screens/BusTimings';
 import ExploreList from '../Screens/ExploreList';
 import CityDetails from '../Screens/CityDetails';
 import PlaceList from '../Screens/PlaceList';
+import EmailSignIn from '../Screens/AuthScreens/EmailSignIn';
+import VerifyOTP from '../Screens/AuthScreens/VerifyOTP';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +54,8 @@ const StackNavigator = () => {
                     <Stack.Screen name="RoutesList" component={RoutesList} />
                     <Stack.Screen name="BusTimings" component={BusTimings} />
                     <Stack.Screen name="Login" component={SignIn} />
+                    <Stack.Screen name="EmailSignIn" component={EmailSignIn} />
+                    <Stack.Screen name="VerifyOTP" component={VerifyOTP} />
                     <Stack.Screen name="SignUp" component={SignUp} />
                     <Stack.Screen name="ExploreList" component={ExploreList} />
                     <Stack.Screen name="CityDetails" component={CityDetails} />

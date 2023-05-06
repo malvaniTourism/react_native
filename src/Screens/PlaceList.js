@@ -26,6 +26,7 @@ const PlaceList = ({ navigation, ...props }) => {
 
     // Function to handle SmallCard click
     const handleSmallCardClick = () => {
+        console.log('click');
         // Navigate to CityScreen component
         // navigation.navigate('CityDetails'); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
     };

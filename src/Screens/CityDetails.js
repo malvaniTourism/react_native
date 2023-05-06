@@ -8,12 +8,12 @@ import { comnGet } from '../Services/Api/CommonServices';
 import { connect } from "react-redux";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CityDetails = ({ navigation, ...props }) => {
+const CityDetails = ({ navigation, route, ...props }) => {
     const [city, setCity] = useState([]); // State to store city
     const [error, setError] = useState(null); // State to store error message
 
     useEffect(() => {
-        comnGet('v1/city', props.access_token)
+        comnGet(`v1/city/${route.params.id}`, props.access_token)
             .then(res => {
                 setCity(res.data.data); // Update city state with response data
             })
@@ -35,7 +35,7 @@ const CityDetails = ({ navigation, ...props }) => {
         <ScrollView>
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    {city}
+                    <Text>{city.name}</Text>
                     {/* {city.map(city => (
                         <TouchableOpacity onPress={handleSmallCardClick}>
                             <SmallCard

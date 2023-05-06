@@ -1,7 +1,29 @@
+export const MobileNo = [
+    {
+        name: 'Mobile',
+        placeholder: 'Mobile Number',
+        type: 'num',
+        length: 50,
+        required: true,
+        disabled: false,
+    }
+]
+
+export const OTP = [
+    {
+        name: 'OTP',
+        placeholder: 'Enter OTP',
+        type: 'num',
+        length: 50,
+        required: true,
+        disabled: false,
+    }
+]
+
 export const SignInFields = [
     {
-        name: 'Username',
-        placeholder: 'Username',
+        name: 'Email',
+        placeholder: 'Email',
         type: 'text',
         length: 50,
         required: true,
@@ -10,7 +32,7 @@ export const SignInFields = [
     {
         name: 'Password',
         placeholder: 'Password',
-        type: 'password',
+        type: 'text',
         length: 10,
         required: true,
         disabled: false,

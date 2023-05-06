@@ -14,6 +14,7 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
   const [role, setRole] = useState('');
+  const [errMsg, setErrorMsg] = useState('')
 
   const setValue = (val, isVal, index) => {
     switch (index) {
@@ -67,6 +68,14 @@ const SignUp = ({ navigation }) => {
     comnPost('auth/register', data)
       .then(res => {
         console.log(res);
+        if (res.data.success) {
+          navigation.navigate('Login')
+        } else if (res.data.message.email) {
+          setErrorMsg("The email has already been taken.")
+        } else if (res.data.message.phone) {
+          setErrorMsg("The mobile has already been taken.")
+        }
+        console.log(res);
       })
       .catch(err => console.log(err))
   }
@@ -104,6 +113,7 @@ const SignUp = ({ navigation }) => {
         type={'Submit'}
         onPress={() => Register()}
       />
+      <Text>{errMsg}</Text>
       <View style={styles.haveAcc}>
         <Text>Already have an Account? </Text>
         <TouchableOpacity onPress={() => signInScreen()}><Text> Sign In</Text></TouchableOpacity>

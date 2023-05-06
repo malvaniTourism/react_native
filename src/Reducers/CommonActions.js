@@ -1,6 +1,7 @@
 import {
     SaveAccess_token,
     SaveLoginUser,
+    SetLoader
 } from './Types';
 
 const saveLoginUser = data => {
@@ -17,4 +18,11 @@ const saveAccess_token = data => {
     }
 }
 
-export { saveLoginUser, saveAccess_token }
+const setLoader = data => {
+    return {
+        type: SetLoader,
+        payload: data
+    }
+}
+
+export { saveLoginUser, saveAccess_token, setLoader }
