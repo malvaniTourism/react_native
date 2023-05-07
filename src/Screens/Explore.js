@@ -5,6 +5,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import COLOR from "../Services/Constants/COLORS"
 import DIMENSIONS from "../Services/Constants/DIMENSIONS"
 import { useNavigation } from '@react-navigation/native'; // Import the navigation hook from your navigation library
+import Loader from "../Components/Customs/Loader"
+import TopComponent from "../Components/Common/TopComponent"
 
 const Explore = () => {
     const navigation = useNavigation(); // Get the navigation object using the useNavigation hook
@@ -23,11 +25,13 @@ const Explore = () => {
     return (
         <ScrollView>
             <View style={{ flex: 1, alignItems: 'center' }}>
+                <Loader />
+                <TopComponent navigation={navigation} />
                 <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity  onPress={() => handleSmallCardClick("Cities")}>
+                    <TouchableOpacity onPress={() => handleSmallCardClick("Cities")}>
                         <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Cities" />
                     </TouchableOpacity>
-                    <TouchableOpacity  onPress={() => handleSmallCardClick("Places")}>
+                    <TouchableOpacity onPress={() => handleSmallCardClick("Places")}>
                         <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Places" />
                     </TouchableOpacity>
                 </View>

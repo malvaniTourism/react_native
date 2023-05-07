@@ -161,7 +161,8 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
 
 const mapStateToProps = state => {
     return {
-        access_token: state.commonState.access_token
+        access_token: state.commonState.access_token,
+        loader: state.commonState.loader
     }
 }
 
