@@ -31,8 +31,8 @@ const HomeScreen = ({ navigation, ...props }) => {
     useEffect(() => {
         saveToken()
         SplashScreen.hide();
+        navigation.navigate('Login')
         if (AsyncStorage.getItem('access_token') == '') {
-            navigation.navigate('Login')
         }
         props.setLoader(false)
     }, [])
