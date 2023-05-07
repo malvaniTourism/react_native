@@ -19,7 +19,7 @@ import { getHash, startOtpListener, useOtpVerify } from 'react-native-otp-verify
 
 const VerifyOTP = ({ navigation, route, ...props }) => {
     const [otp, setOtp] = useState('');
-    const [mobile, setMobile] = useState('');
+    const [mobile, setMobile] = useState(route.params.mobile);
     const [sec, setSec] = useState(30);
     const [fillOtp, setFillOtp] = useState('0000')
 
@@ -35,7 +35,12 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
         }
         comnPost('auth/verifyOtp', data)
             .then(res => {
-                navigation.navigate('Home')
+                if (res.data.success) {
+                    props.setLoader(true)
+                    AsyncStorage.setItem('access_token', res.data.data.access_token)
+                    props.saveAccess_token(res.data.data.access_token)
+                    navigation.navigate('Home')
+                }
             })
             .catch(err => console.log(err))
     }

@@ -31,14 +31,13 @@ const HomeScreen = ({ navigation, ...props }) => {
     useEffect(() => {
         saveToken()
         SplashScreen.hide();
-        navigation.navigate('Login')
-        if (AsyncStorage.getItem('access_token') == '') {
-        }
         props.setLoader(false)
     }, [])
 
     const saveToken = async () => {
-        props.saveAccess_token(await AsyncStorage.getItem('access_token'))
+        if (await AsyncStorage.getItem('access_token') == null || await AsyncStorage.getItem('access_token') == '') {
+            navigation.navigate('Login')
+        }
     }
 
     return (
