@@ -18,15 +18,20 @@ import OtpInputs from 'react-native-otp-inputs';
 import { getHash, startOtpListener, useOtpVerify } from 'react-native-otp-verify';
 
 const VerifyOTP = ({ navigation, route, ...props }) => {
-    const [otp, setOtp] = useState('');
+    const [otp, setOtp] = useState(1234);
     const [mobile, setMobile] = useState(route.params.mobile);
     const [sec, setSec] = useState(30);
-    const [fillOtp, setFillOtp] = useState('0000')
 
     useEffect(() => {
-        setInterval(() => timer(), 1000);
+        // setInterval(() => timer(), 1000);
         startListeningForOtp();
     }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            timer()
+        }, 1000);
+    }, [sec])
 
     const verifyOtp = () => {
         const data = {
@@ -46,16 +51,20 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
     }
 
     const resend = () => {
-        var mob = '+91' + mobile;
-        setSec(30)
-        comnPost('auth/sendotp' + mob)
-            .then((res) => {
+        const data = {
+            mobile
+        }
+        comnPost('auth/sendOtp', data)
+            .then(res => {
+                console.log(res);
+                setSec(30)
             })
+            .catch(err => console.log(err))
     }
 
     const timer = () => {
-        if (sec > 0) {
-            setSec(sec - 1)
+        if (sec) {
+            setSec(sec - 1);
         }
     }
 
@@ -77,7 +86,6 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
                 const otp = /(\d{4})/g.exec(message)[1];
                 if (otp !== null && otp !== undefined) {
                     setOtp(otp)
-                    setFillOtp(otp)
                 }
                 RNOtpVerify.removeListener();
             }
@@ -100,10 +108,10 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
                 </View>
                 <OtpInputs
                     style={{ flexDirection: 'row' }}
-                    numberOfInputs={4}
+                    numberOfInputs={6}
                     inputStyles={{
-                        height: 64,
-                        width: 64,
+                        height: 50,
+                        width: 40,
                         margin: 10,
                         backgroundColor: '#FFFFFF',
                         borderWidth: 1,
@@ -136,7 +144,7 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
                 onPress={() => verifyOtp()}
             />
             {
-                sec > 1 ?
+                sec >= 1 ?
                     <Text style={styles.countertext}>You can resend your OTP within
                         (00:{sec > 9 ? sec : '0' + sec})</Text>
                     :

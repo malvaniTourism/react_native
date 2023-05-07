@@ -35,6 +35,7 @@ const HomeScreen = ({ navigation, ...props }) => {
     }, [])
 
     const saveToken = async () => {
+        console.log(await AsyncStorage.getItem('access_token'));
         if (await AsyncStorage.getItem('access_token') == null || await AsyncStorage.getItem('access_token') == '') {
             navigation.navigate('Login')
         }
