@@ -91,6 +91,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF'
     },
+    alertBackdrop: {
+        height: DIMENSIONS.screenHeight,
+        width: DIMENSIONS.screenWidth,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    alertContainer: {
+        zIndex: 100,
+        backgroundColor: COLOR.white,
+        height: DIMENSIONS.bannerWidth / 2,
+        width: DIMENSIONS.bannerWidth
+    },
+    alertMsgView: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    alertButtonView: {
+        flex: 1
+    },
 });
 
 export default styles;

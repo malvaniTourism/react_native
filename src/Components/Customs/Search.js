@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { SearchBar } from '@rneui/themed';
 import styles from './Styles';
 
-const Search = ({style, placeholder}) => {
+const Search = ({style, placeholder, onChangeText, value}) => {
     const [search, setSearch] = useState("");
 
     const updateSearch = (search) => {
@@ -14,8 +14,8 @@ const Search = ({style, placeholder}) => {
         <View>
             <SearchBar
                 placeholder={placeholder}
-                onChangeText={updateSearch}
-                value={search}
+                onChangeText={onChangeText}
+                value={value}
                 lightTheme
                 round
                 showCancel

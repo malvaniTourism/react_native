@@ -19,6 +19,13 @@ const EmailSignIn = ({ navigation, ...props }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(() => {
+        return () => {
+            setIsAlert(false);
+            setAlertMessage('')
+        }
+    }, [])
+
     const setValue = (val, isVal, index) => {
         switch (index) {
             case 0:
@@ -46,10 +53,16 @@ const EmailSignIn = ({ navigation, ...props }) => {
         }
         comnPost('auth/login', data)
             .then(res => {
-                props.setLoader(true)
-                AsyncStorage.setItem('access_token', res.data.data.access_token)
-                props.saveAccess_token(res.data.data.access_token)
-                navigation.navigate('Home')
+                if (res.data.success) {
+                    setIsAlert(true);
+                    setAlertMessage(res.data.message)
+                    AsyncStorage.setItem('access_token', res.data.data.access_token)
+                    props.saveAccess_token(res.data.data.access_token)
+                    navigation.navigate('Home')
+                } else {
+                    setIsAlert(true);
+                    setAlertMessage(res.data.message)
+                }
             })
             .catch(err => console.log(err))
     }

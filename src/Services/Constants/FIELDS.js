@@ -134,7 +134,7 @@ export const Destination = [
 export const BusNo = [
     {
         name: 'Bus Number',
-        placeholder: 'Search by Bus Number',
+        placeholder: 'Search by Bus Name or Number',
         type: 'number',
         length: 50,
         required: true,

@@ -15,12 +15,11 @@ export const comnGet = async (url, apiToken) => {
 
 export const comnPost = async (url, data) => {    
     const myUrl = Path.API_PATH + url;
-    const token = await AsyncStorage.getItem('access_token');
+    const token = await AsyncStorage.getItem('access_token')
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
-            // Authorization: `Bearer ${localStorage.getItem('apiToken')}`,
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "application/json"
         }
     }
 
