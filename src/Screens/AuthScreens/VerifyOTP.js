@@ -16,15 +16,22 @@ import COLOR from '../../Services/Constants/COLORS'
 import DIMENSIONS from '../../Services/Constants/DIMENSIONS'
 import OtpInputs from 'react-native-otp-inputs';
 import { getHash, startOtpListener, useOtpVerify } from 'react-native-otp-verify';
+import Alert from '../../Components/Customs/Alert'
 
 const VerifyOTP = ({ navigation, route, ...props }) => {
     const [otp, setOtp] = useState(1234);
     const [mobile, setMobile] = useState(route.params.mobile);
     const [sec, setSec] = useState(30);
+    const [isAlert, setIsAlert] = useState('');
+    const [alertMessage, setAlertMessage] = useState('')
 
     useEffect(() => {
         // setInterval(() => timer(), 1000);
         startListeningForOtp();
+        return () => {
+            setIsAlert(false);
+            setAlertMessage('')
+        }
     }, [])
 
     useEffect(() => {
@@ -41,10 +48,14 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
         comnPost('auth/verifyOtp', data)
             .then(res => {
                 if (res.data.success) {
-                    props.setLoader(true)
+                    setIsAlert(true);
+                    setAlertMessage(res.data.message)
                     AsyncStorage.setItem('access_token', res.data.data.access_token)
                     props.saveAccess_token(res.data.data.access_token)
                     navigation.navigate('Home')
+                } else {
+                    setIsAlert(true);
+                    setAlertMessage(res.data.message)
                 }
             })
             .catch(err => console.log(err))
@@ -155,6 +166,7 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
                         </TouchableOpacity>
                     </View>
             }
+            {isAlert && <Alert alertMessage={alertMessage} closeAlert={() => setIsAlert(false)} />}
         </View>
     )
 }

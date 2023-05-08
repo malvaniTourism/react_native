@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { View, Text, ScrollView } from "react-native"
+import { View, Text, ScrollView, LogBox } from "react-native"
 import SearchPanel from "../Components/Common/SearchPanel"
 import TopComponent from "../Components/Common/TopComponent"
 import Banner from "../Components/Customs/Banner"
@@ -29,6 +29,7 @@ const HomeScreen = ({ navigation, ...props }) => {
     )
 
     useEffect(() => {
+        LogBox.ignoreAllLogs();
         saveToken()
         SplashScreen.hide();
         props.setLoader(false)
@@ -36,8 +37,19 @@ const HomeScreen = ({ navigation, ...props }) => {
 
     const saveToken = async () => {
         console.log(await AsyncStorage.getItem('access_token'));
+        navigation.navigate('Login')
         if (await AsyncStorage.getItem('access_token') == null || await AsyncStorage.getItem('access_token') == '') {
-            navigation.navigate('Login')
+        }
+    }
+
+    const searchPlace = (val) => {
+        setSearchValue(val)
+        if (searchValue.length > 2) {
+            comnPost('search', data)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => console.log(err))
         }
     }
 
@@ -53,7 +65,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                                 style={styles.homeSearchBar}
                                 placeholder={field.placeholder}
                                 value={searchValue}
-                                onChangeText={setSearchValue}
+                                onChangeText={(v) => searchPlace(v)}
                             />
                         )
                     })

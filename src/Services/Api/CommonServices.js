@@ -1,5 +1,6 @@
 import axios from "axios";
 import Path from './BaseUrl'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const comnGet = async (url, apiToken) => {
     let myUrl = Path.API_PATH + url;
@@ -14,10 +15,11 @@ export const comnGet = async (url, apiToken) => {
 
 export const comnPost = async (url, data) => {
     const myUrl = Path.API_PATH + url;
+    const token = await AsyncStorage.getItem('access_token')
     const config = {
         headers: {
-            // Authorization: `Bearer ${localStorage.getItem('apiToken')}`,
-            "Content-Type": "multipart/form-data"
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
         }
     }
 

@@ -14,10 +14,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontIcons from 'react-native-vector-icons/FontAwesome5';
 import COLOR from '../../Services/Constants/COLORS'
 import DIMENSIONS from '../../Services/Constants/DIMENSIONS'
+import Alert from '../../Components/Customs/Alert'
 
 const SignIn = ({ navigation, ...props }) => {
   const [mobile, setMobile] = useState('');
-  const [password, setPassword] = useState('');
+  const [isAlert, setIsAlert] = useState('');
+  const [alertMessage, setAlertMessage] = useState('')
+
+  useEffect(() => {
+    return () => {
+      setIsAlert(false);
+      setAlertMessage('')
+    }
+  }, [])
 
   const setValue = (val, isVal, index) => {
     switch (index) {
@@ -40,8 +49,16 @@ const SignIn = ({ navigation, ...props }) => {
     }
     comnPost('auth/sendOtp', data)
       .then(res => {
-        console.log(res);
-        navigation.navigate('VerifyOTP', { mobile })
+        if (res.data.success) {
+          setIsAlert(true);
+          setAlertMessage(res.data.message)
+          navigation.navigate('VerifyOTP', { mobile })
+        } else {
+          if (res.data.message.mobile) {
+            setIsAlert(true);
+            setAlertMessage(res.data.message.mobile[0])
+          }
+        }
       })
       .catch(err => console.log(err))
   }
@@ -85,15 +102,17 @@ const SignIn = ({ navigation, ...props }) => {
         onPress={() => sendOTP()}
       />
 
-      <View style={{marginTop: 30, alignItems: 'center'}}>
-        <Text>----------  OR  ----------</Text>
-        <TouchableOpacity style={{padding: 20, backgroundColor: COLOR.themeDarkGreen}} onPress={() => emailLogin()}><Text>Login with Email</Text></TouchableOpacity>
+      <View style={{ marginTop: 30, alignItems: 'center' }}>
+        <Text style={{ marginBottom: 20 }}>----------  OR  ----------</Text>
+        <TouchableOpacity style={{ paddingVertical: 15, paddingHorizontal: 25, backgroundColor: COLOR.themeDarkGreen }} onPress={() => emailLogin()}><Text style={{ color: COLOR.white }}>Login with Email</Text></TouchableOpacity>
       </View>
 
       <View style={styles.haveAcc}>
         <Text>Don't have an Account? </Text>
         <TouchableOpacity onPress={() => signUpScreen()}><Text> Sign Up</Text></TouchableOpacity>
       </View>
+
+      {isAlert && <Alert alertMessage={alertMessage} closeAlert={() => setIsAlert(false)} />}
     </View>
   )
 }
