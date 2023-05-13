@@ -17,6 +17,7 @@ import PlaceList from '../Screens/PlaceList';
 import EmailSignIn from '../Screens/AuthScreens/EmailSignIn';
 import VerifyOTP from '../Screens/AuthScreens/VerifyOTP';
 import PlaceDetails from '../Screens/PlaceDetails';
+import SearchPlace from '../Screens/SearchPlace';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,7 @@ const StackNavigator = () => {
                     <Stack.Screen name="CityDetails" component={CityDetails} />
                     <Stack.Screen name="PlaceList" component={PlaceList} />
                     <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
+                    <Stack.Screen name="SearchPlace" component={SearchPlace} />
                     {/* <Stack.Screen name="Invite" component={Invite} /> */}
                     {/* <Stack.Screen name="Feed" component={Feed} /> */}
                 </Stack.Group>

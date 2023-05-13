@@ -18,6 +18,8 @@ import DIMENSIONS from '../../Services/Constants/DIMENSIONS'
 const EmailSignIn = ({ navigation, ...props }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isAlert, setIsAlert] = useState(false)
+    const [alertMessage, setAlertMessage] = useState('')
 
     useEffect(() => {
         return () => {

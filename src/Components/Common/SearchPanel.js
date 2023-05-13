@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { SrcDest } from '../../Services/Constants/FIELDS'
 import CustomButton from '../Customs/Button'
 import TextField from '../Customs/TextField'
 import styles from './Styles'
+import { connect } from 'react-redux'
+import { comnPost } from '../../Services/Api/CommonServices'
 
-const SearchPanel = () => {
+const SearchPanel = ({ navigation, ...props }) => {
     const [source, setSource] = useState('')
     const [destination, setDestination] = useState('')
+
+    useEffect(() => {
+        setSource(props.source.name)
+        setDestination(props.destination.name)
+    }, [props])
 
     const setValue = (v, i, index) => {
         switch (index) {
@@ -29,8 +36,13 @@ const SearchPanel = () => {
         }
     }
 
-    const onPress = () => {
+    const gotoSearch = (type) => {
+        console.log('pressed');
+        navigation.navigate('SearchPlace', { type })
+    }
 
+    const gotoRoutes = () => {
+        navigation.navigate('SearchList')
     }
 
     return (
@@ -40,6 +52,7 @@ const SearchPanel = () => {
                     SrcDest.map((field, index) => {
                         return (
                             <TextField
+                                onPress={() => gotoSearch(field.name)}
                                 name={field.name}
                                 label={field.name}
                                 placeholder={field.placeholder}
@@ -65,10 +78,17 @@ const SearchPanel = () => {
                 disabled={false}
                 raised={true}
                 type={'Submit'}
-                onPress={onPress}
+                onPress={gotoRoutes}
             />
         </View>
     )
 }
 
-export default SearchPanel
+const mapStateToProps = state => {
+    return {
+        source: state.commonState.source,
+        destination: state.commonState.destination
+    }
+}
+
+export default connect(mapStateToProps)(SearchPanel)

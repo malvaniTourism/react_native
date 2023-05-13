@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList, View, Text, SafeAreaView } from 'react-native'
 import { ListItem } from '@rneui/themed'
 import Header from '../Components/Common/Header'
@@ -9,33 +9,11 @@ import DIMENSIONS from '../Services/Constants/DIMENSIONS';
 import RouteLine from '../Components/Customs/RouteLine';
 
 const RoutesList = ({ navigation, route }) => {
-    const [list, setList] = useState([
-        {
-            id: 1,
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            name: 'Sion Circle'
-        },
-        {
-            id: 2,
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            name: 'Sion Station'
-        },
-        {
-            id: 3,
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            name: 'Priyadarshini'
-        },
-        {
-            id: 4,
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            name: 'Chembur'
-        },
-        {
-            id: 5,
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            name: 'Dombivli'
-        },
-    ])
+    const [list, setList] = useState(route.params.item.route_stops)
+
+    useEffect(() => {
+        console.log('----------- ', list);
+    }, [])
 
     const renderItem = ({ item }) => {
         return (
@@ -43,7 +21,7 @@ const RoutesList = ({ navigation, route }) => {
                 {/* <Avatar source={{ uri: item.avatar_url }} /> */}
                 <RouteLine />
                 <ListItem.Content>
-                    <ListItem.Title>{item.name}</ListItem.Title>
+                    <ListItem.Title>{item.place.name}</ListItem.Title>
                 </ListItem.Content>
             </ListItem>
         )
@@ -59,7 +37,7 @@ const RoutesList = ({ navigation, route }) => {
 
     return (
         <View>
-            <Header name={route.params.name} goBack={goBack}
+            <Header name={route.params.item.name} goBack={goBack}
                 startIcon={<Ionicons name="bus" color={COLOR.black} size={DIMENSIONS.userIconSize} onPress={() => goBack()} />}
                 endIcon={<Feather name="clock" color={COLOR.black} size={DIMENSIONS.userIconSize} onPress={() => showTiming()} />}
             />

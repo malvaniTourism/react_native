@@ -37,8 +37,9 @@ const HomeScreen = ({ navigation, ...props }) => {
 
     const saveToken = async () => {
         console.log(await AsyncStorage.getItem('access_token'));
-        navigation.navigate('Login')
+        props.saveAccess_token(await AsyncStorage.getItem('access_token'))
         if (await AsyncStorage.getItem('access_token') == null || await AsyncStorage.getItem('access_token') == '') {
+            navigation.navigate('Login')
         }
     }
 
@@ -70,7 +71,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                         )
                     })
                 }
-                <SearchPanel />
+                <SearchPanel navigation={navigation} />
                 <Banner bannerImages={bannerImages} />
                 <View style={{ flexDirection: 'row' }}>
                     <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="One Way Ticket" />

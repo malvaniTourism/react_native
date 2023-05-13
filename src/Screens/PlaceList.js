@@ -12,7 +12,6 @@ const PlaceList = ({ navigation, ...props }) => {
     const [error, setError] = useState(null); // State to store error message
 
     useEffect(() => {
-        console.log('place---', props.access_token);
         comnGet('v1/places', props.access_token)
             .then(res => {
                 setPlaces(res.data.data.data); // Update places state with response data
