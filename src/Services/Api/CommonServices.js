@@ -63,8 +63,7 @@ export const login = async () => {
   return axios
     .post("/auth/login", data)
     .then((res) => {
-      console.log("effect---", res);
       return res.data.access_token;
     })
-    .catch((err) => console.log("err - ", err));
+    .catch((err) => err);
 };

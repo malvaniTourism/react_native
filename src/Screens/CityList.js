@@ -11,7 +11,7 @@ import Loader from "../Components/Customs/Loader";
 import Header from "../Components/Common/Header";
 import { setLoader } from "../Reducers/CommonActions";
 
-const ExploreList = ({ navigation, ...props }) => {
+const CityList = ({ navigation, ...props }) => {
   const [cities, setCities] = useState([]); // State to store cities
   const [error, setError] = useState(null); // State to store error message
 
@@ -19,7 +19,6 @@ const ExploreList = ({ navigation, ...props }) => {
     props.setLoader(true);
     comnGet("v1/cities", props.access_token)
       .then((res) => {
-        console.log(res);
         setCities(res.data.data.data); // Update cities state with response data
         props.setLoader(false);
       })
@@ -86,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExploreList);
+export default connect (mapStateToProps, mapDispatchToProps) (CityList);

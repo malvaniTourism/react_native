@@ -30,7 +30,6 @@ const PlaceList = ({ navigation, ...props }) => {
 
   // Function to handle SmallCard click
   const handleSmallCardClick = (id) => {
-    console.log('clivk ', id);
     navigation.navigate("PlaceDetails", { id }); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
   };
 

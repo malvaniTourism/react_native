@@ -38,7 +38,6 @@ const SearchPlace = ({ navigation, route, ...props }) => {
       })
       .catch((err) => {
         props.setLoader(false);
-        console.log(err);
       });
   };
 
