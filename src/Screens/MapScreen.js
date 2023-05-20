@@ -1,5 +1,5 @@
-import React from 'react'
-import { View } from 'react-native'
+import React from "react";
+import { View } from "react-native";
 // import MapView from 'react-native-maps';
 
 const MapScreen = () => {
@@ -14,7 +14,7 @@ const MapScreen = () => {
         }}
       /> */}
     </View>
-  )
-}
+  );
+};
 
-export default MapScreen
+export default MapScreen;

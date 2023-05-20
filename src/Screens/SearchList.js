@@ -1,49 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import { FlatList, View, Text, SafeAreaView } from 'react-native'
-import { ListItem } from '@rneui/themed'
-import Header from '../Components/Common/Header'
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import COLOR from '../Services/Constants/COLORS';
-import DIMENSIONS from '../Services/Constants/DIMENSIONS';
-import RouteLine from '../Components/Customs/RouteLine';
-import { connect } from 'react-redux';
-import { comnPost } from '../Services/Api/CommonServices';
-import { setLoader } from '../Reducers/CommonActions';
-import Loader from '../Components/Customs/Loader';
+import React, { useEffect, useState } from "react";
+import { FlatList, View, Text, SafeAreaView } from "react-native";
+import { ListItem } from "@rneui/themed";
+import Header from "../Components/Common/Header";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import COLOR from "../Services/Constants/COLORS";
+import DIMENSIONS from "../Services/Constants/DIMENSIONS";
+import RouteLine from "../Components/Customs/RouteLine";
+import { connect } from "react-redux";
+import { comnPost } from "../Services/Api/CommonServices";
+import { setLoader } from "../Reducers/CommonActions";
+import Loader from "../Components/Customs/Loader";
 
 const SearchList = ({ navigation, ...props }) => {
-  const [list, setList] = useState([])
+  const [list, setList] = useState([]);
 
   useEffect(() => {
-    searchRoute()
-  }, [])
+    searchRoute();
+  }, []);
 
   const getRoutes = (item) => {
-    navigation.navigate('RoutesList', { item })
-  }
+    navigation.navigate("RoutesList", { item });
+  };
 
   const searchRoute = () => {
-    props.setLoader(true)
+    props.setLoader(true);
     const data = {
       source_place_id: props.source.id,
-      destination_place_id: props.destination.id
-    }
+      destination_place_id: props.destination.id,
+    };
     console.log(data);
-    comnPost('v1/routes', data)
-      .then(res => {
+    comnPost("v1/routes", data)
+      .then((res) => {
         if (res.data.success) {
           console.log(res.data);
-          setList(res.data.data)
-          props.setLoader(false)
+          setList(res.data.data);
+          props.setLoader(false);
         } else {
-          props.setLoader(false)
+          props.setLoader(false);
         }
       })
-      .catch(err => {
-        console.log(err)
-        props.setLoader(false)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+        props.setLoader(false);
+      });
+  };
 
   const renderItem = ({ item }) => {
     return (
@@ -57,47 +57,56 @@ const SearchList = ({ navigation, ...props }) => {
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-    )
-  }
+    );
+  };
 
   const goBack = () => {
     navigation.goBack();
-  }
+  };
 
   return (
     <View>
-      <Header name={'Search List'} goBack={goBack}
-        startIcon={<Ionicons name="chevron-back-outline" color={COLOR.black} size={DIMENSIONS.userIconSize} onPress={() => goBack()} />}
+      <Header
+        name={"Search List"}
+        goBack={goBack}
+        startIcon={
+          <Ionicons
+            name="chevron-back-outline"
+            color={COLOR.black}
+            size={DIMENSIONS.userIconSize}
+            onPress={() => goBack()}
+          />
+        }
       />
       <Loader />
       <SafeAreaView>
-        {list[0] ?
+        {list[0] ? (
           <FlatList
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
             data={list}
             renderItem={renderItem}
-          /> :
+          />
+        ) : (
           <Text>No Routes Available</Text>
-        }
+        )}
       </SafeAreaView>
     </View>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     source: state.commonState.source,
-    destination: state.commonState.destination
-  }
-}
+    destination: state.commonState.destination,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setLoader: data => {
-      dispatch(setLoader(data))
-    }
-  }
-}
+    setLoader: (data) => {
+      dispatch(setLoader(data));
+    },
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchList)
-
+export default connect(mapStateToProps, mapDispatchToProps)(SearchList);

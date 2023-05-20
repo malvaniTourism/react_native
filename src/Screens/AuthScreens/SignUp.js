@@ -1,120 +1,122 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { SignUpFields } from '../../Services/Constants/FIELDS'
-import TextField from '../../Components/Customs/TextField'
-import Header from '../../Components/Common/Header'
-import CustomButton from '../../Components/Customs/Button'
-import styles from './Styles'
-import { comnGet, comnPost } from '../../Services/Api/CommonServices'
-import Loader from '../../Components/Customs/Loader'
-import { connect } from 'react-redux'
-import { setLoader } from '../../Reducers/CommonActions'
-import DropDown from '../../Components/Customs/DropDown'
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { SignUpFields } from "../../Services/Constants/FIELDS";
+import TextField from "../../Components/Customs/TextField";
+import Header from "../../Components/Common/Header";
+import CustomButton from "../../Components/Customs/Button";
+import styles from "./Styles";
+import { comnGet, comnPost } from "../../Services/Api/CommonServices";
+import Loader from "../../Components/Customs/Loader";
+import { connect } from "react-redux";
+import { setLoader } from "../../Reducers/CommonActions";
+import DropDown from "../../Components/Customs/DropDown";
 
 const SignUp = ({ navigation, ...props }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [password, setPassword] = useState('');
-  const [cpassword, setCpassword] = useState('');
-  const [role, setRole] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [role, setRole] = useState("");
   const [roles, setRoles] = useState([]);
-  const [errMsg, setErrorMsg] = useState('')
+  const [errMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    props.setLoader(true)
-    comnGet('v1/roleDD')
-      .then(res => {
+    props.setLoader(true);
+    comnGet("v1/roleDD")
+      .then((res) => {
         if (res.data.success) {
-          props.setLoader(false)
+          props.setLoader(false);
           console.log(res.data.data);
-          setRoles(res.data.data)
+          setRoles(res.data.data);
         } else {
-          props.setLoader(false)
+          props.setLoader(false);
         }
       })
-      .catch(err => {
-        props.setLoader(false)
-      })
-  }, [])
+      .catch((err) => {
+        props.setLoader(false);
+      });
+  }, []);
 
   const setValue = (val, isVal, index) => {
     switch (index) {
       case 0:
-        setName(val)
+        setName(val);
         break;
       case 1:
-        setEmail(val)
+        setEmail(val);
         break;
       case 2:
-        setMobile(val)
+        setMobile(val);
         break;
       case 3:
-        setPassword(val)
+        setPassword(val);
         break;
       case 4:
-        setCpassword(val)
+        setCpassword(val);
         break;
       default:
-        setRole(val)
+        setRole(val);
         break;
     }
-  }
+  };
 
   const getValue = (i) => {
     switch (i) {
       case 0:
-        return name
+        return name;
       case 1:
-        return email
+        return email;
       case 2:
-        return mobile
+        return mobile;
       case 3:
-        return password
+        return password;
       case 4:
-        return cpassword
+        return cpassword;
       default:
-        return role
+        return role;
     }
-  }
+  };
 
   const Register = () => {
-    props.setLoader(true)
+    props.setLoader(true);
     const data = {
       name: name,
       email: email,
       mobile: mobile,
       password: password,
       password_confirmation: cpassword,
-      role_id: role
-    }
-    comnPost('auth/register', data)
-      .then(res => {
+      role_id: role,
+    };
+    comnPost("auth/register", data)
+      .then((res) => {
         console.log(res);
         if (res.data.success) {
-          props.setLoader(false)
-          navigation.navigate('Login')
+          props.setLoader(false);
+          navigation.navigate("Login");
         } else if (res.data.message.email) {
-          props.setLoader(false)
-          setErrorMsg("The email has already been taken.")
+          props.setLoader(false);
+          setErrorMsg("The email has already been taken.");
         } else if (res.data.message.phone) {
-          props.setLoader(false)
-          setErrorMsg("The mobile has already been taken.")
+          props.setLoader(false);
+          setErrorMsg("The mobile has already been taken.");
         }
       })
-      .catch(err => {
-        props.setLoader(false)
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        props.setLoader(false);
+        console.log(err);
+      });
+  };
 
   const signInScreen = () => {
-    navigation.navigate('Login');
-  }
+    navigation.navigate("Login");
+  };
 
   return (
-    <View style={{ alignItems: 'center' }}>
-      <Header name={'Register'} style={{ marginBottom: 50 }}
+    <View style={{ alignItems: "center" }}>
+      <Header
+        name={"Register"}
+        style={{ marginBottom: 50 }}
         startIcon={<View></View>}
       />
       <Loader />
@@ -143,42 +145,44 @@ const SignUp = ({ navigation, ...props }) => {
             value={getValue(index)}
             setChild={(v, i) => setValue(v, i, index)}
           />
-        )
+        );
       })}
       <CustomButton
-        title={'Register'}
+        title={"Register"}
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.buttonStyle}
         titleStyle={styles.buttonTitle}
         disabled={false}
         raised={true}
-        type={'Submit'}
+        type={"Submit"}
         onPress={() => Register()}
       />
       <Text>{errMsg}</Text>
       <View style={styles.haveAcc}>
         <Text>Already have an Account? </Text>
-        <TouchableOpacity onPress={() => signInScreen()}><Text> Sign In</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => signInScreen()}>
+          <Text> Sign In</Text>
+        </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    access_token: state.commonState.access_token
-  }
-}
+    access_token: state.commonState.access_token,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    saveAccess_token: data => {
-      dispatch(saveAccess_token(data))
+    saveAccess_token: (data) => {
+      dispatch(saveAccess_token(data));
     },
-    setLoader: data => {
-      dispatch(setLoader(data))
-    }
-  }
-}
+    setLoader: (data) => {
+      dispatch(setLoader(data));
+    },
+  };
+};
 
-export default connect (mapStateToProps, mapDispatchToProps) (SignUp)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

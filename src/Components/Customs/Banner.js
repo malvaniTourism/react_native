@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { View, Text, Animated, ImageBackground, Image } from 'react-native'
-import Carousel from 'react-native-reanimated-carousel';
-import DIMENSIONS from '../../Services/Constants/DIMENSIONS';
-import styles from './Styles';
+import React, { Component } from "react";
+import { View, Text, Animated, ImageBackground, Image } from "react-native";
+import Carousel from "react-native-reanimated-carousel";
+import DIMENSIONS from "../../Services/Constants/DIMENSIONS";
+import styles from "./Styles";
 
 class AnimationStyle extends Component {
   state = {
     opacity: new Animated.Value(0),
-  }
+  };
 
   onLoad = () => {
     Animated.timing(this.state.opacity, {
@@ -15,7 +15,7 @@ class AnimationStyle extends Component {
       duration: 500,
       useNativeDriver: true,
     }).start();
-  }
+  };
 
   render() {
     return (
@@ -30,7 +30,7 @@ class AnimationStyle extends Component {
                 scale: this.state.opacity.interpolate({
                   inputRange: [0, 1],
                   outputRange: [0.85, 1],
-                })
+                }),
               },
             ],
           },
@@ -42,7 +42,6 @@ class AnimationStyle extends Component {
 }
 
 const Banner = ({ style, bannerImages }) => {
-
   return (
     <View style={[styles.banner, style]}>
       <Carousel
@@ -56,11 +55,14 @@ const Banner = ({ style, bannerImages }) => {
         scrollAnimationDuration={1000}
         // onSnapToItem={(index) => console.log('current index:', index)}
         renderItem={({ index }) => (
-            <AnimationStyle source={{uri: `${bannerImages[index]}`}} style={styles.bannerImage} ></AnimationStyle>
+          <AnimationStyle
+            source={{ uri: `${bannerImages[index]}` }}
+            style={styles.bannerImage}
+          ></AnimationStyle>
         )}
       />
     </View>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;
