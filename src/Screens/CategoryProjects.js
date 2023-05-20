@@ -11,16 +11,17 @@ import Loader from "../Components/Customs/Loader";
 import Header from "../Components/Common/Header";
 import { setLoader } from "../Reducers/CommonActions";
 
-const ExploreList = ({ navigation, ...props }) => {
-  const [cities, setCities] = useState([]); // State to store cities
+const CategoryProjects = ({ navigation, route, ...props }) => {
+  const [projects, setProjects] = useState([]); // State to store Projects
   const [error, setError] = useState(null); // State to store error message
 
   useEffect(() => {
     props.setLoader(true);
-    comnGet("v1/cities", props.access_token)
+
+    comnGet(`v1/category/${route.params.id}/projects`, props.access_token)
       .then((res) => {
-        console.log(res);
-        setCities(res.data.data.data); // Update cities state with response data
+        console.log(res.data.data);
+        setProjects(res.data.data); // Update Projects state with response data
         props.setLoader(false);
       })
       .catch((error) => {
@@ -42,7 +43,7 @@ const ExploreList = ({ navigation, ...props }) => {
     <ScrollView>
       <View style={{ flex: 1, alignItems: "center" }}>
         <Loader />
-        <Header name={'Places'}
+        <Header name={route.params.name}
           startIcon={
             <Ionicons
               name="chevron-back-outline"
@@ -52,8 +53,8 @@ const ExploreList = ({ navigation, ...props }) => {
             />
           }
         />
-        <View style={{ flexDirection: "row" }}>
-          {cities.map((city) => (
+        <View style={{ flexDirection: "row", flexWrap: 'wrap' }}>
+          {projects && projects[0].projects.map((project) => (
               <SmallCard
                 Icon={
                   <Ionicons
@@ -62,8 +63,8 @@ const ExploreList = ({ navigation, ...props }) => {
                     size={DIMENSIONS.iconSize}
                   />
                 }
-                title={city.name}
-                onPress={() => handleSmallCardClick(city.id)}
+                title={project.name}
+                onPress={() => handleSmallCardClick(project.id)}
               />
           ))}
         </View>
@@ -86,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExploreList);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryProjects);

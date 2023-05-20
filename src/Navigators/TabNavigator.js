@@ -6,7 +6,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import COLOR from "../Services/Constants/COLORS";
 import DIMENSIONS from "../Services/Constants/DIMENSIONS";
-import Explore from "../Screens/Explore";
 import Food from "../Screens/Food";
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +29,7 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Explore"
         component={Explore}
         options={{
@@ -43,7 +42,7 @@ const TabNavigator = () => {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Food"
         component={Food}

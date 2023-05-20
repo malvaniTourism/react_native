@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, ScrollView, LogBox, Icon } from "react-native";
+import { View, Text, ScrollView, LogBox, Image } from "react-native";
 import SearchPanel from "../Components/Common/SearchPanel";
 import TopComponent from "../Components/Common/TopComponent";
 import Banner from "../Components/Customs/Banner";
@@ -43,13 +43,13 @@ const HomeScreen = ({ navigation, ...props }) => {
     // ];
 
     useEffect(() => {
-        props.setLoader(true);
         if (props.access_token) {
             callLandingPageAPI();
         }
         LogBox.ignoreAllLogs();
         saveToken();
         SplashScreen.hide();
+        props.setLoader(false);
     }, [props.access_token]);
 
     const saveToken = async () => {
@@ -78,6 +78,7 @@ const HomeScreen = ({ navigation, ...props }) => {
         props.setLoader(true);
         comnGet("v1/landingpage", props.access_token)
             .then((res) => {
+                console.log('== == ', res);
                 setCategories(res.data.data.categories);
                 setCities(res.data.data.cities);
                 setProjects(res.data.data.projects);
@@ -92,8 +93,8 @@ const HomeScreen = ({ navigation, ...props }) => {
             });
     };
 
-    const handleSmallCardClick = (page, id) => {
-        navigation.navigate(page, { id });
+    const handleSmallCardClick = (page, id, name) => {
+        navigation.navigate(page, { id, name });
     };
 
     const showMore = (page) => {
@@ -140,25 +141,32 @@ const HomeScreen = ({ navigation, ...props }) => {
                         title="Card Recharge"
                     />
                 </View>
-                <Text>===============================================</Text>
-                <Text>================Categories=====================</Text>
-                <Text>===============================================</Text>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {categories.map((category, index) => (
-                        // <Text>{category.name}</Text>
-                        <SmallCard
-                            key={index}
-                            Icon={
-                                <Ionicons
-                                    name={Path.API_PATH + category.image_url}
-                                    color={COLOR.yellow}
-                                    size={DIMENSIONS.iconSize}
-                                />
-                            }
-                            title={category.name}
-                        />
-                    ))}
-                </ScrollView>
+
+                <View style={styles.sectionView}>
+                    <Text style={styles.sectionTitle}>Categories</Text>
+                    <View style={styles.cardsWrap}>
+                        {categories.map((category, index) => (
+                            // <Text>{category.name}</Text>
+                            <SmallCard
+                                key={index}
+                                Icon={
+                                    <Image
+                                        source={{uri: Path.API_PATH + category.image_url}}
+                                        color={COLOR.yellow}
+                                        size={DIMENSIONS.iconSize}
+                                    />
+                                }
+                                title={category.name}
+                                onPress={() => handleSmallCardClick("CategoryProjects", category.id, category.name)}
+                            />
+                        ))}
+                    </View>
+                    {/* <CustomButton
+                        title={'Show More'}
+                        containerStyle={styles.showMore}
+                        onPress={() => showMore('ExploreList')}
+                    /> */}
+                </View>
 
                 <View style={styles.sectionView}>
                     <Text style={styles.sectionTitle}>Cities</Text>
@@ -167,8 +175,8 @@ const HomeScreen = ({ navigation, ...props }) => {
                             <SmallCard
                                 key={index}
                                 Icon={
-                                    <Ionicons
-                                        name={Path.API_PATH + city.image_url}
+                                    <Image
+                                        source={{ uri: Path.API_PATH + city.image_url}}
                                         color={COLOR.yellow}
                                         size={DIMENSIONS.iconSize}
                                     />
@@ -195,8 +203,8 @@ const HomeScreen = ({ navigation, ...props }) => {
                         <SmallCard
                             key={index}
                             Icon={
-                                <Ionicons
-                                    name={Path.API_PATH + project.image_url}
+                                <Image
+                                    source={{ uri: Path.API_PATH + project.image_url}}
                                     color={COLOR.yellow}
                                     size={DIMENSIONS.iconSize}
                                 />
@@ -214,8 +222,8 @@ const HomeScreen = ({ navigation, ...props }) => {
                         <SmallCard
                             key={index}
                             Icon={
-                                <Ionicons
-                                    name={Path.API_PATH + stop.icon}
+                                <Image
+                                    source={{ uri: Path.API_PATH + stop.icon}}
                                     color={COLOR.yellow}
                                     size={DIMENSIONS.iconSize}
                                 />
@@ -233,8 +241,8 @@ const HomeScreen = ({ navigation, ...props }) => {
                         <SmallCard
                             key={index}
                             Icon={
-                                <Ionicons
-                                    name={Path.API_PATH + place_cate.icon}
+                                <Image
+                                    source={{ uri: Path.API_PATH + place_cate.icon}}
                                     color={COLOR.yellow}
                                     size={DIMENSIONS.iconSize}
                                 />
@@ -251,8 +259,8 @@ const HomeScreen = ({ navigation, ...props }) => {
                             <SmallCard
                                 key={index}
                                 Icon={
-                                    <Ionicons
-                                        name={Path.API_PATH + place.icon}
+                                    <Image
+                                        source={{ uri: Path.API_PATH + place.icon}}
                                         color={COLOR.yellow}
                                         size={DIMENSIONS.iconSize}
                                     />

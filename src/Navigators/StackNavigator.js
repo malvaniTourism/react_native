@@ -11,7 +11,7 @@ import SignUp from "../Screens/AuthScreens/SignUp";
 import SearchList from "../Screens/SearchList";
 import RoutesList from "../Screens/RoutesList";
 import BusTimings from "../Screens/BusTimings";
-import ExploreList from "../Screens/ExploreList";
+import CategoryProjects from "../Screens/CategoryProjects";
 import CityDetails from "../Screens/CityDetails";
 import PlaceList from "../Screens/PlaceList";
 import EmailSignIn from "../Screens/AuthScreens/EmailSignIn";
@@ -61,7 +61,7 @@ const StackNavigator = () => {
           <Stack.Screen name="EmailSignIn" component={EmailSignIn} />
           <Stack.Screen name="VerifyOTP" component={VerifyOTP} />
           <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="ExploreList" component={ExploreList} />
+          <Stack.Screen name="CategoryProjects" component={CategoryProjects} />
           <Stack.Screen name="CityDetails" component={CityDetails} />
           <Stack.Screen name="PlaceList" component={PlaceList} />
           <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
