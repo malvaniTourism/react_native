@@ -49,6 +49,7 @@ const EmailSignIn = ({ navigation, ...props }) => {
     }
 
     const Login = () => {
+        props.setLoader(true)
         const data = {
             email,
             password
@@ -60,23 +61,29 @@ const EmailSignIn = ({ navigation, ...props }) => {
                     setAlertMessage(res.data.message)
                     AsyncStorage.setItem('access_token', res.data.data.access_token)
                     props.saveAccess_token(res.data.data.access_token)
+                    props.setLoader(false)
                     navigation.navigate('Home')
                 } else {
                     setIsAlert(true);
                     setAlertMessage(res.data.message)
+                    props.setLoader(false)
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                props.setLoader(false)
+                console.log(err)
+            })
     }
 
     const signUpScreen = () => {
         navigation.navigate('SignUp');
-        console.log('clicked');
     }
 
     return (
         <View style={{ alignItems: 'center' }}>
-            <Header name={'Login'} style={{ marginBottom: 50 }} />
+            <Header name={'Login'} style={{ marginBottom: 50 }}
+                startIcon={<View></View>}
+            />
             <Loader />
             <FontIcons name="user-circle" color={COLOR.black} size={DIMENSIONS.userIconSize} style={styles.appLogo} />
             {SignInFields.map((field, index) => {

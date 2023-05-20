@@ -22,7 +22,7 @@ export const comnPost = async (url, data) => {
             "Content-Type": "application/json"
         }
     }
-
+    console.log(myUrl);
     return axios.post(myUrl, data, config)
         .then(res => res)
         .catch(err => err)
@@ -33,7 +33,7 @@ export const comnPut = async (url, data) => {
     const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem('apiToken')}` }
     }
-
+    console.log(myUrl);
     return axios.put(myUrl, data, config)
         .then(res => res)
         .catch(err => err)
@@ -44,7 +44,7 @@ export const ComnDel = async (url, data) => {
     const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem('apiToken')}` }
     }
-
+    console.log(myUrl);
     return axios.delete(myUrl, data, config)
         .then(res => res)
         .catch(err => err)
@@ -55,8 +55,7 @@ export const login = async () => {
         email: "test@gmail.com",
         password: "Test@123"
     }
-    console.log('effect');
-    
+    console.log(myUrl);
     return axios.post('/auth/login', data)
     .then(res => {
             console.log('effect---', res);

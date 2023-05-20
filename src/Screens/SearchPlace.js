@@ -6,17 +6,19 @@ import SearchBar from "../Components/Customs/Search"
 import styles from "./Styles"
 import { comnPost } from '../Services/Api/CommonServices'
 import { ListItem } from '@rneui/themed'
-import { setDestination, setSource } from '../Reducers/CommonActions'
+import { setDestination, setLoader, setSource } from '../Reducers/CommonActions'
+import Loader from '../Components/Customs/Loader'
 
 const SearchPlace = ({ navigation, route, ...props }) => {
     const [searchValue, setSearchValue] = useState('')
     const [placesList, setPlacesList] = useState([])
 
     useEffect(() => {
-        searchPlace('')
+        searchPlace()
     }, []);
 
     const searchPlace = (v) => {
+        // props.setLoader(true)
         setSearchValue(v)
         let data = {
             search: searchValue
@@ -24,13 +26,16 @@ const SearchPlace = ({ navigation, route, ...props }) => {
         comnPost('v1/searchPlace', data)
             .then(res => {
                 if (res.data.success) {
-                    console.log(res.data.data);
                     setPlacesList(res.data.data)
+                    props.setLoader(false)
                 } else {
-
+                    props.setLoader(false)
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                props.setLoader(false)
+                console.log(err)
+            })
     }
 
     const setPlace = (place) => {
@@ -55,6 +60,7 @@ const SearchPlace = ({ navigation, route, ...props }) => {
 
     return (
         <View>
+            <Loader />
             <Header
                 Component={
                     <SearchBar
@@ -90,6 +96,9 @@ const mapDispatchToProps = dispatch => {
         },
         setDestination: data => {
             dispatch(setDestination(data))
+        },
+        setLoader: data => {
+            dispatch(setLoader(data))
         }
     }
 }

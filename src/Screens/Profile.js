@@ -8,20 +8,22 @@ import { comnGet, comnPost } from '../Services/Api/CommonServices';
 import { connect } from "react-redux";
 import Loader from "../Components/Customs/Loader"
 import TopComponent from "../Components/Common/TopComponent"
+import { setLoader } from '../Reducers/CommonActions';
 
 const Profile = ({ navigation, ...props }) => {
   const [profile, setProfile] = useState([]); // State to store places
   const [error, setError] = useState(null); // State to store error message
 
   useEffect(() => {
+    props.setLoader(true)
     comnGet('v1/user-profile', props.access_token)
       .then(res => {
         setProfile(res.data.data); // Update places state with response data
+        props.setLoader(false)
       })
       .catch(error => {
-        console.log(error);
-
         setError(error.message); // Update error state with error message
+        props.setLoader(false)
       });
   }, []);
 
@@ -30,32 +32,34 @@ const Profile = ({ navigation, ...props }) => {
   }
 
   const handleLogout = () => {
+    props.setLoader(true)
     // Call your logout API here
     // For example:
-    console.log("ads", props.access_token);
     comnPost('v1/logout')
       .then(res => {
         console.log(res);
         if (res.data.success) {
+          props.setLoader(false)
           navigation.navigate('Login')
         }
         // Do something after successful logout, such as clearing your access_token from state
       })
       .catch(error => {
-        console.log(error);
+        props.setLoader(false)
       });
   }
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="chevron-back-outline" size={24} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleLogout}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View>
+      <Header name={'Profile'}
+        startIcon={<Ionicons name="chevron-back-outline" size={24} onPress={() => goBack()} />}
+        endIcon={
+          <TouchableOpacity onPress={handleLogout}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
+        }
+      />
+      <Loader />
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <Text>Name: {profile.name}</Text>
         <Text>Email: {profile.email}</Text>
         <Text>Profile: {profile.profile}</Text>
@@ -71,4 +75,12 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Profile)
+const mapDispatchToProps = dispatch => {
+  return {
+    setLoader: data => {
+      dispatch(setLoader(data))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

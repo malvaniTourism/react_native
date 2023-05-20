@@ -6,30 +6,34 @@ import COLOR from '../Services/Constants/COLORS';
 import DIMENSIONS from '../Services/Constants/DIMENSIONS';
 import { comnGet } from '../Services/Api/CommonServices';
 import { connect } from "react-redux";
+import { setLoader } from '../Reducers/CommonActions';
+import Loader from '../Components/Customs/Loader';
 
 const PlaceList = ({ navigation, ...props }) => {
     const [places, setPlaces] = useState([]); // State to store places
     const [error, setError] = useState(null); // State to store error message
 
     useEffect(() => {
+        props.setLoader(true)
         comnGet('v1/places', props.access_token)
             .then(res => {
                 setPlaces(res.data.data.data); // Update places state with response data
+                props.setLoader(false)
             })
             .catch(error => {
-                console.log(error);
                 setError(error.message); // Update error state with error message
+                props.setLoader(false)
             });
     }, []);
 
     // Function to handle SmallCard click
     const handleSmallCardClick = (id) => {
-        console.log('click');
         navigation.navigate('PlaceDetails', { id }); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
     };
 
     return (
         <ScrollView>
+            <Loader />
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <View>
                     {places.map(place => (
@@ -54,4 +58,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(PlaceList);
+const mapDispatchToProps = dispatch => {
+    return {
+        setLoader: data => {
+            dispatch(setLoader(data))
+        }
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (PlaceList);

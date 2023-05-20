@@ -8,6 +8,8 @@ import DIMENSIONS from '../Services/Constants/DIMENSIONS';
 import RouteLine from '../Components/Customs/RouteLine';
 import { connect } from 'react-redux';
 import { comnPost } from '../Services/Api/CommonServices';
+import { setLoader } from '../Reducers/CommonActions';
+import Loader from '../Components/Customs/Loader';
 
 const SearchList = ({ navigation, ...props }) => {
   const [list, setList] = useState([])
@@ -21,21 +23,27 @@ const SearchList = ({ navigation, ...props }) => {
   }
 
   const searchRoute = () => {
+    props.setLoader(true)
     const data = {
-        source_place_id: props.source.id,
-        destination_place_id: props.destination.id
+      source_place_id: props.source.id,
+      destination_place_id: props.destination.id
     }
+    console.log(data);
     comnPost('v1/routes', data)
-    .then(res => {
+      .then(res => {
         if (res.data.success) {
-          console.log('--00--00 -- ', res.data.data);
-            setList(res.data.data)
+          console.log(res.data);
+          setList(res.data.data)
+          props.setLoader(false)
         } else {
-            
+          props.setLoader(false)
         }
-    })
-    .catch(err => console.log(err))
-}
+      })
+      .catch(err => {
+        console.log(err)
+        props.setLoader(false)
+      })
+  }
 
   const renderItem = ({ item }) => {
     return (
@@ -61,13 +69,14 @@ const SearchList = ({ navigation, ...props }) => {
       <Header name={'Search List'} goBack={goBack}
         startIcon={<Ionicons name="chevron-back-outline" color={COLOR.black} size={DIMENSIONS.userIconSize} onPress={() => goBack()} />}
       />
+      <Loader />
       <SafeAreaView>
         {list[0] ?
-        <FlatList
-          keyExtractor={item => item.id}
-          data={list}
-          renderItem={renderItem}
-        /> : 
+          <FlatList
+            keyExtractor={item => item.id}
+            data={list}
+            renderItem={renderItem}
+          /> :
           <Text>No Routes Available</Text>
         }
       </SafeAreaView>
@@ -77,10 +86,18 @@ const SearchList = ({ navigation, ...props }) => {
 
 const mapStateToProps = state => {
   return {
-      source: state.commonState.source,
-      destination: state.commonState.destination
+    source: state.commonState.source,
+    destination: state.commonState.destination
   }
 }
 
-export default connect(mapStateToProps) (SearchList)
+const mapDispatchToProps = dispatch => {
+  return {
+    setLoader: data => {
+      dispatch(setLoader(data))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchList)
 

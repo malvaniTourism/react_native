@@ -44,6 +44,7 @@ const SignIn = ({ navigation, ...props }) => {
   }
 
   const sendOTP = () => {
+    props.setLoader(true)
     const data = {
       mobile
     }
@@ -52,15 +53,20 @@ const SignIn = ({ navigation, ...props }) => {
         if (res.data.success) {
           setIsAlert(true);
           setAlertMessage(res.data.message)
+          props.setLoader(false)
           navigation.navigate('VerifyOTP', { mobile })
         } else {
           if (res.data.message.mobile) {
             setIsAlert(true);
             setAlertMessage(res.data.message.mobile[0])
+            props.setLoader(false)
           }
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        props.setLoader(false)
+        console.log(err)
+      })
   }
 
   const signUpScreen = () => {
@@ -73,7 +79,9 @@ const SignIn = ({ navigation, ...props }) => {
 
   return (
     <View style={{ alignItems: 'center' }}>
-      <Header name={'Login'} style={{ marginBottom: 50 }} />
+      <Header name={'Login'} style={{ marginBottom: 50 }}
+        startIcon={<View></View>}
+      />
       <Loader />
       <FontIcons name="user-circle" color={COLOR.black} size={DIMENSIONS.userIconSize} style={styles.appLogo} />
       {MobileNo.map((field, index) => {

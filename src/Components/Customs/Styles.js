@@ -113,6 +113,14 @@ const styles = StyleSheet.create({
     alertButtonView: {
         flex: 1
     },
+    dropdown: {
+        width: DIMENSIONS.bannerWidth + 20,
+        backgroundColor: COLOR.white,
+        marginBottom: 25,
+        padding: 7,
+        borderWidth: 1,
+        borderColor: COLOR.grey
+    }
 });
 
 export default styles;

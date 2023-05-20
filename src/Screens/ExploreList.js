@@ -9,21 +9,23 @@ import { connect } from "react-redux";
 import { useNavigation } from '@react-navigation/native'; // Import the navigation hook from your navigation library
 import Loader from "../Components/Customs/Loader"
 import TopComponent from "../Components/Common/TopComponent"
+import { setLoader } from '../Reducers/CommonActions';
 
 const ExploreList = ({ navigation, ...props }) => {
     const [cities, setCities] = useState([]); // State to store cities
     const [error, setError] = useState(null); // State to store error message
 
     useEffect(() => {
-        console.log("token " + props.access_token);
+        props.setLoader(true)
 
         comnGet('v1/cities', props.access_token)
             .then(res => {
                 console.log(res);
                 setCities(res.data.data.data); // Update cities state with response data
+                props.setLoader(false)
             })
             .catch(error => {
-                console.log(error);
+                props.setLoader(false)
                 setError(error.message); // Update error state with error message
             });
     }, []);
@@ -62,4 +64,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(ExploreList);
+const mapDispatchToProps = dispatch => {
+    return {
+        setLoader: data => {
+            dispatch(setLoader(data))
+        }
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps) (ExploreList);

@@ -41,6 +41,7 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
     }, [sec])
 
     const verifyOtp = () => {
+        props.setLoader(true)
         const data = {
             mobile,
             otp
@@ -52,25 +53,35 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
                     setAlertMessage(res.data.message)
                     AsyncStorage.setItem('access_token', res.data.data.access_token)
                     props.saveAccess_token(res.data.data.access_token)
+                    props.setLoader(false)
                     navigation.navigate('Home')
                 } else {
                     setIsAlert(true);
                     setAlertMessage(res.data.message)
+                    props.setLoader(false)
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                props.setLoader(false)
+                console.log(err)
+            })
     }
 
     const resend = () => {
+        props.setLoader(true)
         const data = {
             mobile
         }
         comnPost('auth/sendOtp', data)
             .then(res => {
+                props.setLoader(false)
                 console.log(res);
                 setSec(30)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                props.setLoader(false)
+                console.log(err)
+            })
     }
 
     const timer = () => {

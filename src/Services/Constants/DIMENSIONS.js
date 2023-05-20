@@ -19,7 +19,9 @@ const DIMENSIONS = {
     borderRadiusXS: 10,
     borderRadiusXXS: 5,
     headerHeight: sw / 7,
-    headerTextSize: 17
+    headerTextSize: 17,
+    subtitleTextSize: 17,
+    sectionGap: 20
 };
 
 export default DIMENSIONS;

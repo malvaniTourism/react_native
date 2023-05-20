@@ -79,15 +79,7 @@ export const SignUpFields = [
         length: 10,
         required: true,
         disabled: false,
-    },
-    {
-        name: 'Role',
-        placeholder: 'Role',
-        type: 'text',
-        length: 50,
-        required: true,
-        disabled: false,
-    },
+    }
 ]
 
 export const SrcDest = [

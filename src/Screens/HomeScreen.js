@@ -16,6 +16,7 @@ import { saveAccess_token, setLoader } from "../Reducers/CommonActions"
 import Loader from "../Components/Customs/Loader"
 import SplashScreen from 'react-native-splash-screen'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Path from "../Services/Api/BaseUrl"
 
 const HomeScreen = ({ navigation, ...props }) => {
     const [searchValue, setSearchValue] = useState('')
@@ -43,16 +44,13 @@ const HomeScreen = ({ navigation, ...props }) => {
     // ];
 
     useEffect(() => {
-        LogBox.ignoreAllLogs();
-        saveToken()
-        SplashScreen.hide();
-        props.setLoader(false)
-    }, [])
-
-    useEffect(() => {
+        props.setLoader(true)
         if (props.access_token) {
             callLandingPageAPI();
         }
+        LogBox.ignoreAllLogs();
+        saveToken()
+        SplashScreen.hide();
     }, [props.access_token]);
 
     const saveToken = async () => {
@@ -75,21 +73,26 @@ const HomeScreen = ({ navigation, ...props }) => {
     }
 
     const callLandingPageAPI = () => {
-        // Make the API call here
-        console.log(props.access_token);
+        props.setLoader(true)
         comnGet("v1/landingpage", props.access_token)
             .then(res => {
-                setCategories(res.data.data.categories); 
-                setCities(res.data.data.cities); 
-                setProjects(res.data.data.projects); 
-                setStops(res.data.data.stops); 
-                setPlace_category(res.data.data.place_category); 
-                setPlaces(res.data.data.places); 
+                setCategories(res.data.data.categories);
+                setCities(res.data.data.cities);
+                setProjects(res.data.data.projects);
+                setStops(res.data.data.stops);
+                setPlace_category(res.data.data.place_category);
+                setPlaces(res.data.data.places);
+                props.setLoader(false)
             })
             .catch(error => {
-                console.log(error);
+                props.setLoader(false)
                 setError(error.message); // Update error state with error message
             });
+    };
+
+    const handleSmallCardClick = (page, id) => {
+        // Navigate to CityScreen component
+        navigation.navigate('CityDetails', { id }); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
     };
 
     return (
@@ -116,62 +119,66 @@ const HomeScreen = ({ navigation, ...props }) => {
                     <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Chalo Bus" />
                     <SmallCard Icon={<Ionicons name="bus" color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title="Card Recharge" />
                 </View>
-                <Text>=====================================================</Text>
-                <Text>===================Categories========================</Text>
-                <Text>=====================================================</Text>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Text>===============================================</Text>
+                <Text>================Categories=====================</Text>
+                <Text>===============================================</Text>
+                <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                >
                     {categories.map((category, index) => (
                         // <Text>{category.name}</Text>
-                        <SmallCard key={index} Icon={<Ionicons name={`https://tour.pranavkamble.in/${category.image_url}`} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={category.name} />
+                        <SmallCard key={index} Icon={<Ionicons name={Path.API_PATH + category.image_url} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={category.name} />
                     ))}
-                </View>
-                <Text>=====================================================</Text>
-                <Text>===================Cities============================</Text>
-                <Text>=====================================================</Text>
+                </ScrollView>
 
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                <View style={styles.sectionView}>
+                    <Text style={styles.sectionTitle}>Cities</Text>
+                    <View style={styles.cardsWrap}>
                     {cities.map((city, index) => (
-                        // <Text>{category.name}</Text>
-                        <SmallCard key={index} Icon={<Ionicons name={`https://tour.pranavkamble.in/${city.image_url}`} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={city.name} />
+                        <SmallCard key={index} Icon={<Ionicons name={Path.API_PATH + city.image_url} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={city.name} onPress={() => handleSmallCardClick('ExploreList', city.id)} />
                     ))}
+                    </View>
                 </View>
-                <Text>=====================================================</Text>
-                <Text>===================Projects==========================</Text>
-                <Text>=====================================================</Text>
 
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Text>===============================================</Text>
+                <Text>=============== Projects ======================</Text>
+                <Text>===============================================</Text>
+
+                <View style={styles.cardsWrap}>
                     {projects.map((project, index) => (
                         // <Text>{category.name}</Text>
-                        <SmallCard key={index} Icon={<Ionicons name={`https://tour.pranavkamble.in/${project.image_url}`} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={project.name} />
+                        <SmallCard key={index} Icon={<Ionicons name={Path.API_PATH + project.image_url} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={project.name} />
                     ))}
                 </View>
-                <Text>=====================================================</Text>
-                <Text>======================Stops==========================</Text>
-                <Text>=====================================================</Text>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Text>===============================================</Text>
+                <Text>================== Stops ======================</Text>
+                <Text>===============================================</Text>
+                <View style={styles.cardsWrap}>
                     {stops.map((stop, index) => (
                         // <Text>{category.name}</Text>
-                        <SmallCard key={index} Icon={<Ionicons name={`https://tour.pranavkamble.in/${stop.icon}`} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={stop.name} />
+                        <SmallCard key={index} Icon={<Ionicons name={Path.API_PATH + stop.icon} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={stop.name} />
                     ))}
                 </View>
-                <Text>=====================================================</Text>
-                <Text>===================Place Category====================</Text>
-                <Text>=====================================================</Text>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Text>===============================================</Text>
+                <Text>=============== Place Category ================</Text>
+                <Text>===============================================</Text>
+                <View style={styles.cardsWrap}>
                     {place_category.map((place_cate, index) => (
                         // <Text>{category.name}</Text>
-                        <SmallCard key={index} Icon={<Ionicons name={`https://tour.pranavkamble.in/${place_cate.icon}`} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={place_cate.name} />
+                        <SmallCard key={index} Icon={<Ionicons name={Path.API_PATH + place_cate.icon} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={place_cate.name} />
                     ))}
                 </View>
-                <Text>=====================================================</Text>
-                <Text>=====================Places==========================</Text>
-                <Text>=====================================================</Text>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+
+                <View style={styles.sectionView}>
+                    <Text style={styles.sectionTitle}>Places</Text>
+                    <View style={styles.cardsWrap}>
                     {places.map((place, index) => (
-                        // <Text>{category.name}</Text>
-                        <SmallCard key={index} Icon={<Ionicons name={`https://tour.pranavkamble.in/${place.icon}`} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={place.name} />
+                        <SmallCard key={index} Icon={<Ionicons name={Path.API_PATH + place.icon} color={COLOR.yellow} size={DIMENSIONS.iconSize} />} title={place.name} onPress={() => handleSmallCardClick('PlaceList', place.id)} />
                     ))}
+                    </View>
                 </View>
+
             </View>
         </ScrollView>
     )

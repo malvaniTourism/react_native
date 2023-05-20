@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.themeDarkGreen,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 20
     },
     headerText: {
         fontWeight: 'bold',
