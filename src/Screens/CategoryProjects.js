@@ -20,8 +20,8 @@ const CategoryProjects = ({ navigation, route, ...props }) => {
 
     comnGet(`v1/category/${route.params.id}/projects`, props.access_token)
       .then((res) => {
-        console.log(res);
-        setProjects(res.data.data.data); // Update Projects state with response data
+        console.log(res.data.data);
+        setProjects(res.data.data); // Update Projects state with response data
         props.setLoader(false);
       })
       .catch((error) => {
@@ -53,8 +53,8 @@ const CategoryProjects = ({ navigation, route, ...props }) => {
             />
           }
         />
-        <View style={{ flexDirection: "row" }}>
-          {projects.map((project) => (
+        <View style={{ flexDirection: "row", flexWrap: 'wrap' }}>
+          {projects && projects[0].projects.map((project) => (
               <SmallCard
                 Icon={
                   <Ionicons

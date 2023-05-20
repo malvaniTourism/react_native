@@ -49,6 +49,7 @@ const HomeScreen = ({ navigation, ...props }) => {
         LogBox.ignoreAllLogs();
         saveToken();
         SplashScreen.hide();
+        props.setLoader(false);
     }, [props.access_token]);
 
     const saveToken = async () => {
@@ -156,7 +157,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                                     />
                                 }
                                 title={category.name}
-                                onPress={() => handleSmallCardClick("CategoryPlaces", category.id, category.name)}
+                                onPress={() => handleSmallCardClick("CategoryProjects", category.id, category.name)}
                             />
                         ))}
                     </View>
