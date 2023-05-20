@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
+import { View, ScrollView, Text, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import DrawerNavigator from "./DrawerNavigator";
 import TabNavigator from "./TabNavigator";
 
-import SignIn from "../Screens/AuthScreens/SignIn";
-import SignUp from "../Screens/AuthScreens/SignUp";
-
-import SearchList from "../Screens/SearchList";
-import RoutesList from "../Screens/RoutesList";
-import BusTimings from "../Screens/BusTimings";
-import CategoryProjects from "../Screens/CategoryProjects";
-import CityDetails from "../Screens/CityDetails";
-import PlaceList from "../Screens/PlaceList";
-import EmailSignIn from "../Screens/AuthScreens/EmailSignIn";
-import VerifyOTP from "../Screens/AuthScreens/VerifyOTP";
-import PlaceDetails from "../Screens/PlaceDetails";
-import SearchPlace from "../Screens/SearchPlace";
+const SignIn = lazy(() => import("../Screens/AuthScreens/SignIn"));
+const SignUp = lazy(() => import("../Screens/AuthScreens/SignUp"));
+const SearchList = lazy(() => import("../Screens/SearchList"));
+const RoutesList = lazy(() => import("../Screens/RoutesList"));
+const BusTimings = lazy(() => import("../Screens/BusTimings"));
+const CategoryProjects = lazy(() => import("../Screens/CategoryProjects"));
+const CityDetails = lazy(() => import("../Screens/CityDetails"));
+const CityList = lazy(() => import("../Screens/CityList"));
+const PlaceList = lazy(() => import("../Screens/PlaceList"));
+const EmailSignIn = lazy(() => import("../Screens/AuthScreens/EmailSignIn"));
+const VerifyOTP = lazy(() => import("../Screens/AuthScreens/VerifyOTP"));
+const PlaceDetails = lazy(() => import("../Screens/PlaceDetails"));
+const SearchPlace = lazy(() => import("../Screens/SearchPlace"));
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const StackNavigator = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
+    <Suspense fallback={<Text>Loading...</Text>}>
     <NavigationContainer>
       <Stack.Navigator>
         {isLoggedIn ? (
@@ -63,6 +65,7 @@ const StackNavigator = () => {
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="CategoryProjects" component={CategoryProjects} />
           <Stack.Screen name="CityDetails" component={CityDetails} />
+          <Stack.Screen name="CityList" component={CityList} />
           <Stack.Screen name="PlaceList" component={PlaceList} />
           <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
           <Stack.Screen name="SearchPlace" component={SearchPlace} />
@@ -71,6 +74,7 @@ const StackNavigator = () => {
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
+    </Suspense>
   );
 };
 

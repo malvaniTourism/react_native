@@ -67,7 +67,6 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
       })
       .catch((err) => {
         props.setLoader(false);
-        console.log(err);
       });
   };
 
@@ -79,12 +78,10 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
     comnPost("auth/sendOtp", data)
       .then((res) => {
         props.setLoader(false);
-        console.log(res);
         setSec(30);
       })
       .catch((err) => {
         props.setLoader(false);
-        console.log(err);
       });
   };
 
@@ -100,14 +97,12 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
         .then((p) => RNOtpVerify.addListener(otpHandler))
         .catch((p) => console.log(p));
     } catch (e) {
-      console.log(e);
     }
   };
 
   const otpHandler = (message) => {
     try {
       if (message) {
-        console.log("msg", message);
         const otp = /(\d{4})/g.exec(message)[1];
         if (otp !== null && otp !== undefined) {
           setOtp(otp);
@@ -115,7 +110,6 @@ const VerifyOTP = ({ navigation, route, ...props }) => {
         RNOtpVerify.removeListener();
       }
     } catch (e) {
-      console.log(e);
     }
   };
 

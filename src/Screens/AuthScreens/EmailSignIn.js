@@ -71,7 +71,6 @@ const EmailSignIn = ({ navigation, ...props }) => {
       })
       .catch((err) => {
         props.setLoader(false);
-        console.log(err);
       });
   };
 

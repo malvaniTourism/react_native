@@ -37,7 +37,6 @@ const SearchPanel = ({ navigation, ...props }) => {
   };
 
   const gotoSearch = (type) => {
-    console.log("pressed");
     navigation.navigate("SearchPlace", { type });
   };
 

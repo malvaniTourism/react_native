@@ -28,11 +28,9 @@ const SearchList = ({ navigation, ...props }) => {
       source_place_id: props.source.id,
       destination_place_id: props.destination.id,
     };
-    console.log(data);
     comnPost("v1/routes", data)
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data);
           setList(res.data.data);
           props.setLoader(false);
         } else {
@@ -40,7 +38,6 @@ const SearchList = ({ navigation, ...props }) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         props.setLoader(false);
       });
   };

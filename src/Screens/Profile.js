@@ -37,7 +37,6 @@ const Profile = ({ navigation, ...props }) => {
     // For example:
     comnPost("v1/logout")
       .then((res) => {
-        console.log(res);
         if (res.data.success) {
           props.setLoader(false);
           navigation.navigate("Login");

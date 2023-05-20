@@ -12,7 +12,6 @@ const RoutesList = ({ navigation, route }) => {
   const [list, setList] = useState(route.params.item.route_stops);
 
   useEffect(() => {
-    console.log("----------- ", list);
   }, []);
 
   const renderItem = ({ item }) => {

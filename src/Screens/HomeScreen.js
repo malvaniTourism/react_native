@@ -53,7 +53,6 @@ const HomeScreen = ({ navigation, ...props }) => {
     }, [props.access_token]);
 
     const saveToken = async () => {
-        console.log(await AsyncStorage.getItem("access_token"));
         props.saveAccess_token(await AsyncStorage.getItem("access_token"));
         if (
             (await AsyncStorage.getItem("access_token")) == null ||
@@ -68,9 +67,9 @@ const HomeScreen = ({ navigation, ...props }) => {
         if (searchValue.length > 2) {
             comnPost("search", data)
                 .then((res) => {
-                    console.log(res);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                });
         }
     };
 
@@ -78,7 +77,6 @@ const HomeScreen = ({ navigation, ...props }) => {
         props.setLoader(true);
         comnGet("v1/landingpage", props.access_token)
             .then((res) => {
-                console.log('== == ', res);
                 setCategories(res.data.data.categories);
                 setCities(res.data.data.cities);
                 setProjects(res.data.data.projects);
@@ -151,7 +149,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                                 key={index}
                                 Icon={
                                     <Image
-                                        source={{uri: Path.API_PATH + category.image_url}}
+                                        source={{ uri: Path.API_PATH + category.image_url }}
                                         color={COLOR.yellow}
                                         size={DIMENSIONS.iconSize}
                                     />
@@ -176,7 +174,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                                 key={index}
                                 Icon={
                                     <Image
-                                        source={{ uri: Path.API_PATH + city.image_url}}
+                                        source={{ uri: Path.API_PATH + city.image_url }}
                                         color={COLOR.yellow}
                                         size={DIMENSIONS.iconSize}
                                     />
@@ -204,7 +202,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                             key={index}
                             Icon={
                                 <Image
-                                    source={{ uri: Path.API_PATH + project.image_url}}
+                                    source={{ uri: Path.API_PATH + project.image_url }}
                                     color={COLOR.yellow}
                                     size={DIMENSIONS.iconSize}
                                 />
@@ -223,7 +221,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                             key={index}
                             Icon={
                                 <Image
-                                    source={{ uri: Path.API_PATH + stop.icon}}
+                                    source={{ uri: Path.API_PATH + stop.icon }}
                                     color={COLOR.yellow}
                                     size={DIMENSIONS.iconSize}
                                 />
@@ -242,7 +240,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                             key={index}
                             Icon={
                                 <Image
-                                    source={{ uri: Path.API_PATH + place_cate.icon}}
+                                    source={{ uri: Path.API_PATH + place_cate.icon }}
                                     color={COLOR.yellow}
                                     size={DIMENSIONS.iconSize}
                                 />
@@ -260,7 +258,7 @@ const HomeScreen = ({ navigation, ...props }) => {
                                 key={index}
                                 Icon={
                                     <Image
-                                        source={{ uri: Path.API_PATH + place.icon}}
+                                        source={{ uri: Path.API_PATH + place.icon }}
                                         color={COLOR.yellow}
                                         size={DIMENSIONS.iconSize}
                                     />

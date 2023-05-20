@@ -13,7 +13,6 @@ const TextField = (props) => {
 
   const onChange = (value) => {
     let txtVal = value.trimLeft();
-    console.log(txtVal);
     if (txtVal !== "") {
       switch (props.fieldType) {
         case "text": {
@@ -94,9 +93,7 @@ const TextField = (props) => {
               /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/
             )
           ) {
-            // var text="namita.com@yopmail.com.com";
             var txt = txtVal.split("@")[1];
-            //console.log(txt.split(".com").length - 1)
             var value = txt.split(".com").length - 1;
             if (value > 1 && value !== ".com.co") {
               setErrorText(props.errMsg);

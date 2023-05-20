@@ -27,7 +27,6 @@ const SignUp = ({ navigation, ...props }) => {
       .then((res) => {
         if (res.data.success) {
           props.setLoader(false);
-          console.log(res.data.data);
           setRoles(res.data.data);
         } else {
           props.setLoader(false);
@@ -90,7 +89,6 @@ const SignUp = ({ navigation, ...props }) => {
     };
     comnPost("auth/register", data)
       .then((res) => {
-        console.log(res);
         if (res.data.success) {
           props.setLoader(false);
           navigation.navigate("Login");
@@ -104,7 +102,6 @@ const SignUp = ({ navigation, ...props }) => {
       })
       .catch((err) => {
         props.setLoader(false);
-        console.log(err);
       });
   };
 
