@@ -17,6 +17,7 @@ import Loader from "../Components/Customs/Loader";
 import SplashScreen from "react-native-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Path from "../Services/Api/BaseUrl";
+import CustomButton from "../Components/Customs/Button";
 
 const HomeScreen = ({ navigation, ...props }) => {
     const [searchValue, setSearchValue] = useState("");
@@ -87,14 +88,17 @@ const HomeScreen = ({ navigation, ...props }) => {
             })
             .catch((error) => {
                 props.setLoader(false);
-                setError(error.message); // Update error state with error message
+                setError(error.message);
             });
     };
 
     const handleSmallCardClick = (page, id) => {
-        // Navigate to CityScreen component
-        navigation.navigate("CityDetails", { id }); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
+        navigation.navigate(page, { id });
     };
+
+    const showMore = (page) => {
+        navigation.navigate(page);
+    }
 
     return (
         <ScrollView>
@@ -170,10 +174,15 @@ const HomeScreen = ({ navigation, ...props }) => {
                                     />
                                 }
                                 title={city.name}
-                                onPress={() => handleSmallCardClick("ExploreList", city.id)}
+                                onPress={() => handleSmallCardClick("CityDetails", city.id)}
                             />
                         ))}
                     </View>
+                    <CustomButton
+                        title={'Show More'}
+                        containerStyle={styles.showMore}
+                        onPress={() => showMore('ExploreList')}
+                    />
                 </View>
 
                 <Text>===============================================</Text>
@@ -249,10 +258,15 @@ const HomeScreen = ({ navigation, ...props }) => {
                                     />
                                 }
                                 title={place.name}
-                                onPress={() => handleSmallCardClick("PlaceList", place.id)}
+                                onPress={() => handleSmallCardClick("PlaceDetails", place.id)}
                             />
                         ))}
                     </View>
+                    <CustomButton
+                        title={'Show More'}
+                        containerStyle={styles.showMore}
+                        onPress={() => showMore('PlaceList')}
+                    />
                 </View>
             </View>
         </ScrollView>

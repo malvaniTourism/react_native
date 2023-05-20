@@ -8,6 +8,8 @@ import { comnGet } from "../Services/Api/CommonServices";
 import { connect } from "react-redux";
 import { setLoader } from "../Reducers/CommonActions";
 import Loader from "../Components/Customs/Loader";
+import styles from "./Styles";
+import Header from "../Components/Common/Header";
 
 const PlaceList = ({ navigation, ...props }) => {
   const [places, setPlaces] = useState([]); // State to store places
@@ -28,16 +30,30 @@ const PlaceList = ({ navigation, ...props }) => {
 
   // Function to handle SmallCard click
   const handleSmallCardClick = (id) => {
+    console.log('clivk ', id);
     navigation.navigate("PlaceDetails", { id }); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
+  };
+
+  const goBack = () => {
+    navigation.goBack();
   };
 
   return (
     <ScrollView>
       <Loader />
+      <Header name={'Places'}
+        startIcon={
+          <Ionicons
+            name="chevron-back-outline"
+            color={COLOR.black}
+            size={DIMENSIONS.userIconSize}
+            onPress={() => goBack()}
+          />
+        }
+      />
       <View style={{ flex: 1, alignItems: "center" }}>
-        <View>
+        <View style={styles.cardsWrap}>
           {places.map((place) => (
-            <TouchableOpacity onPress={() => handleSmallCardClick(place.id)}>
               <SmallCard
                 Icon={
                   <Ionicons
@@ -47,8 +63,8 @@ const PlaceList = ({ navigation, ...props }) => {
                   />
                 }
                 title={place.name} // Update the title prop to reference the appropriate property from the city object
+                onPress={() => handleSmallCardClick(place.id)}
               />
-            </TouchableOpacity>
           ))}
         </View>
       </View>

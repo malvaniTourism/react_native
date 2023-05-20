@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         alignItems: "center",
     },
+    showMore: {
+        width: DIMENSIONS.halfWidth,
+        alignItems: 'center'
+    }
 });
 
 export default styles;

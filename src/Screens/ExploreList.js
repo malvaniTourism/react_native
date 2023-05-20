@@ -8,7 +8,7 @@ import { comnGet } from "../Services/Api/CommonServices";
 import { connect } from "react-redux";
 import { useNavigation } from "@react-navigation/native"; // Import the navigation hook from your navigation library
 import Loader from "../Components/Customs/Loader";
-import TopComponent from "../Components/Common/TopComponent";
+import Header from "../Components/Common/Header";
 import { setLoader } from "../Reducers/CommonActions";
 
 const ExploreList = ({ navigation, ...props }) => {
@@ -32,19 +32,29 @@ const ExploreList = ({ navigation, ...props }) => {
 
   // Function to handle SmallCard click
   const handleSmallCardClick = (id) => {
-    console.log("click");
-    // Navigate to CityScreen component
-    navigation.navigate("CityDetails", { id }); // Replace 'CityScreen' with the name of your CityScreen component in your navigation stack
+    navigation.navigate("CityDetails", { id });
+  };
+
+  const goBack = () => {
+    navigation.goBack();
   };
 
   return (
     <ScrollView>
       <View style={{ flex: 1, alignItems: "center" }}>
         <Loader />
-        <TopComponent navigation={navigation} />
+        <Header name={'Places'}
+          startIcon={
+            <Ionicons
+              name="chevron-back-outline"
+              color={COLOR.black}
+              size={DIMENSIONS.userIconSize}
+              onPress={() => goBack()}
+            />
+          }
+        />
         <View style={{ flexDirection: "row" }}>
           {cities.map((city) => (
-            <TouchableOpacity onPress={() => handleSmallCardClick(city.id)}>
               <SmallCard
                 Icon={
                   <Ionicons
@@ -54,8 +64,8 @@ const ExploreList = ({ navigation, ...props }) => {
                   />
                 }
                 title={city.name}
+                onPress={() => handleSmallCardClick(city.id)}
               />
-            </TouchableOpacity>
           ))}
         </View>
       </View>
