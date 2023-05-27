@@ -194,23 +194,32 @@ const HomeScreen = ({ navigation, ...props }) => {
                 <Text>===============================================</Text>
                 <Text>=============== Projects ======================</Text>
                 <Text>===============================================</Text>
-
-                <View style={styles.cardsWrap}>
+                <View style={styles.sectionView}>
+                    <Text style={styles.sectionTitle}>Tops Projects</Text>
+                    <View style={styles.cardsWrap}>
                     {projects.map((project, index) => (
-                        // <Text>{category.name}</Text>
-                        <SmallCard
-                            key={index}
-                            Icon={
-                                <Image
-                                    source={{ uri: Path.API_PATH + project.image_url }}
-                                    color={COLOR.yellow}
-                                    size={DIMENSIONS.iconSize}
-                                />
-                            }
-                            title={project.name}
-                        />
-                    ))}
+                            <SmallCard
+                                key={index}
+                                Icon={
+                                    <Image
+                                        source={{ uri: Path.API_PATH + project.icon}}
+                                        color={COLOR.yellow}
+                                        size={DIMENSIONS.iconSize}
+                                    />
+                                }
+                                title={project.name}
+                                onPress={() => handleSmallCardClick("ProjectDetails", project.id)}
+                            />
+                        ))}
+                    </View>
+                    <CustomButton
+                        title={'Show More'}
+                        containerStyle={styles.showMore}
+                        onPress={() => showMore('ProjectsList')}
+                    />
                 </View>
+
+
                 <Text>===============================================</Text>
                 <Text>================== Stops ======================</Text>
                 <Text>===============================================</Text>
